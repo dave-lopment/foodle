@@ -25,7 +25,17 @@ describe User do
     user = build(:user)
     expect(user).to be_valid
   end
-  it 'expect email to have right form'
+
+  it 'expect email to not have incorrect form' do
+    user = build(:user, email_address: 'invalid@Emailcom')
+    expect(user).not_to be_valid
+  end
+
+  it 'expect email to have right form' do
+    user = build(:user, email_address: 'valid@email.com');
+    expect(user).to be_valid
+  end
+
   it 'expect email not to be nil' do
     user = build(:user, email_address: '')
     expect(user).not_to be_valid
