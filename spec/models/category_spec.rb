@@ -5,4 +5,9 @@ describe Category do
     categorie = build(:category, name: '  ')
     expect(categorie).not_to be_valid
   end
+
+  it "should be invalid if name too long" do
+    category = build(:category, name: 'a'*33)
+    expect(category).not_to be_valid
+  end
 end
