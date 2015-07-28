@@ -12,7 +12,12 @@ describe Article do
   end
 
   it "expect not to be valid when price less than 0" do
-    article = FactoryGirl.build(:article, price: '-50')
+    article = FactoryGirl.build(:article, price: -50)
+    expect(article).not_to be_valid
+  end
+
+  it "expect price to have correct format (number.xx)" do
+    article = FactoryGirl.build(:article, price: 10.123)
     expect(article).not_to be_valid
   end
 end
