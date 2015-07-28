@@ -25,17 +25,14 @@ describe User do
     user = build(:user)
     expect(user).to be_valid
   end
-
   it 'expect email to not have incorrect form' do
     user = build(:user, email_address: 'invalid@Emailcom')
     expect(user).not_to be_valid
   end
-
   it 'expect email to have right form' do
     user = build(:user, email_address: 'valid@email.com');
     expect(user).to be_valid
   end
-
   it 'expect email not to be nil' do
     user = build(:user, email_address: '')
     expect(user).not_to be_valid
@@ -57,6 +54,10 @@ describe User do
      user = build(:user, street: '   ')
      expect(user).not_to be_valid
   end
+  it 'expect street to be valid' do
+    user = build(:user)
+    expect(user).to be_valid
+  end
   it 'expect city not to be nil' do
      user = build(:user, city: '')
      expect(user).not_to be_valid
@@ -64,5 +65,17 @@ describe User do
   it 'expect city not to be blank' do
      user = build(:user, city: '   ')
      expect(user).not_to be_valid
+  end
+  it 'expect city to be valid' do
+     user = build(:user)
+     expect(user).to be_valid
+  end
+  it 'expect user not to be admin by default' do
+    user = build(:user)
+    expect(user).not_to be_admin
+  end
+  it 'expect user to be admin' do
+    user = build(:user, admin: true)
+    expect(user).to be_admin
   end
 end
