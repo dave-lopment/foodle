@@ -17,7 +17,7 @@ describe Article do
   end
 
   it "expect price to have correct format (number.xx)" do
-    article = build(:article, price: 10.123)
+    article = build(:article, :invalid_article_attributes)
     expect(article).not_to be_valid
   end
 end

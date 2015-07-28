@@ -12,7 +12,7 @@ FactoryGirl.define do
     admin false
   end
 
-  trait :invalid_attributes do
+  trait :invalid_user_attributes do
     name ''
     password ''
     email 'invalidmail.com'
