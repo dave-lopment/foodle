@@ -12,13 +12,14 @@ FactoryGirl.define do
     admin false
   end
 
-    trait :invalid_attributes do
-      password ''
-      email 'invalidmail.com'
-      postal ''
-      city ''
-      street ''
+  trait :invalid_attributes do
+    name ''
+    password ''
+    email 'invalidmail.com'
+    postal ''
+    city ''
+    street ''
 
-    end
+  end
 
 end
