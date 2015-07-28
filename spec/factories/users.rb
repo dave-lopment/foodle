@@ -11,4 +11,14 @@ FactoryGirl.define do
     postal "12345"
     admin false
   end
+
+    trait :invalid_attributes do
+      password ''
+      email 'invalidmail.com'
+      postal ''
+      city ''
+      street ''
+
+    end
+
 end

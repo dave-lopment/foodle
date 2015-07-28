@@ -6,7 +6,7 @@ describe User do
     expect(user).not_to be_valid
   end
   it 'expect postal code not to be nil' do
-    user = build(:user, postal: '')
+    user = build(:user, :invalid_attributes)
     expect(user).not_to be_valid
   end
   it 'expect postal code not to be blank' do
@@ -26,7 +26,7 @@ describe User do
     expect(user).to be_valid
   end
   it 'expect email to not have incorrect form' do
-    user = build(:user, email: 'invalid@Emailcom')
+    user = build(:user, :invalid_attributes)
     expect(user).not_to be_valid
   end
   it 'expect email to have right form' do
