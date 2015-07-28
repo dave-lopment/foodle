@@ -8,5 +8,6 @@ FactoryGirl.define do
     street "Muster Strasse 15"
     city "Entenhausen"
     postal "12345"
+    admin false
   end
 end
