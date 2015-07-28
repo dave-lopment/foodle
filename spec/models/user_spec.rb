@@ -26,24 +26,24 @@ describe User do
     expect(user).to be_valid
   end
   it 'expect email to not have incorrect form' do
-    user = build(:user, email_address: 'invalid@Emailcom')
+    user = build(:user, email: 'invalid@Emailcom')
     expect(user).not_to be_valid
   end
   it 'expect email to have right form' do
-    user = build(:user, email_address: 'valid@email.com');
+    user = build(:user, email: 'valid@email.com');
     expect(user).to be_valid
   end
   it 'expect email not to be nil' do
-    user = build(:user, email_address: '')
+    user = build(:user, email: '')
     expect(user).not_to be_valid
   end
   it 'expect email not to be blank' do
-    user = build(:user, email_address: '   ')
+    user = build(:user, email: '   ')
     expect(user).not_to be_valid
   end
   it 'expect email_address to be unique' do
-    userA = create(:user, email_address: 'abc@example.org') # user must be saved in the db
-    userB = build(:user, email_address: 'abc@example.org') # new user with same email_address
+    userA = create(:user, email: 'abc@example.org') # user must be saved in the db
+    userB = build(:user, email: 'abc@example.org') # new user with same email_address
     expect(userB).not_to be_valid
   end
   it 'expect street not to be nil' do

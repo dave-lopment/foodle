@@ -6,7 +6,6 @@ FactoryGirl.define do
     sequence(:name){ |i| "Peter Lustig#{i}"}
     password "password"
     email {"#{name}@example.org".downcase.delete(' ')}
-    email_address {"#{name}@example.org".downcase.delete(' ')}
     street "Muster Strasse 15"
     city "Entenhausen"
     postal "12345"
