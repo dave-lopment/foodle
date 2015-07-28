@@ -6,7 +6,7 @@ FactoryGirl.define do
     description "What a wonderful article"
   end
 
-  trait :invalid_article_attributes do
+  trait :empty_article_attributes do
     name ''
     price 2.234
     description ''

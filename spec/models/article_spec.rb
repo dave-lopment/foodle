@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe Article do
+
   it "expect not to be valid when name is blank" do
-    article = build(:article, name: ' ')
+    article = build(:article, name: '    ')
     expect(article).not_to be_valid
   end
 
   it "expect not to be valid when no price" do
-    article = build(:article, price: ' ')
+    article = build(:article, price: '')
     expect(article).not_to be_valid
   end
 
@@ -17,7 +18,7 @@ describe Article do
   end
 
   it "expect price to have correct format (number.xx)" do
-    article = build(:article, :invalid_article_attributes)
+    article = build(:article, price: 10.123)
     expect(article).not_to be_valid
   end
 end
