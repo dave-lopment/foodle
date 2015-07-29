@@ -6,7 +6,7 @@ describe User do
     expect(user).not_to be_valid
   end
   it 'expect postal code not to be nil' do
-    user = build(:user, postal: '')
+    user = build(:user, postal: nil)
     expect(user).not_to be_valid
   end
   it 'expect postal code not to be blank' do
@@ -34,7 +34,7 @@ describe User do
     expect(user).to be_valid
   end
   it 'expect email not to be nil' do
-    user = build(:user, email: '')
+    user = build(:user, email: nil)
     expect(user).not_to be_valid
   end
   it 'expect email not to be blank' do
@@ -47,7 +47,7 @@ describe User do
     expect(userB).not_to be_valid
   end
   it 'expect street not to be nil' do
-     user = build(:user, street: '')
+     user = build(:user, street: nil)
      expect(user).not_to be_valid
   end
   it 'expect street not to be blank' do
@@ -59,7 +59,7 @@ describe User do
     expect(user).to be_valid
   end
   it 'expect city not to be nil' do
-     user = build(:user, city: '')
+     user = build(:user, city: nil)
      expect(user).not_to be_valid
   end
   it 'expect city not to be blank' do
