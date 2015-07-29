@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe Category do
   it "should be invalid when no name" do
-    categorie = build(:category, name: '  ')
-    expect(categorie).not_to be_valid
+    category = build(:category, name: '  ')
+    expect(category).not_to be_valid
   end
 
   it "should be invalid if name too long" do
