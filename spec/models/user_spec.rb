@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe User do
+  it "expect to be valid with normal attributes" do
+    user = build(:user)
+    expect(user).to be_valid
+  end
+
   it 'expect not to be valid' do
     user = build(:user, name: '')
     expect(user).not_to be_valid
