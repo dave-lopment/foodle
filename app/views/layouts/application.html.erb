@@ -7,7 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= nav_bar fixed: :top  %>
+  <%= nav_bar fixed: :top  do %>
+    <%= menu_group do %>
+      <%= menu_item "Home", '#' %>
+      <%= menu_item "PlaceHolder", '#' %>
+      <%= drop_down "DropPlaceHolder" do %>
+        <%= menu_item "Item 1", '#' %>
+        <%= menu_item "Item 2", '#' %>
+        <%= menu_item "Item 3", '#' %>
+      <% end %>
+    <% end %>
+
+    <%= menu_group :pull => :right do %>
+        <% if current_user %>
+            <%= menu_item "Log Out", '#' %>
+        <% else %>
+            <%= menu_item "Log In", '#' %> 
+        <% end %>
+    <% end %>
+  <% end %>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
