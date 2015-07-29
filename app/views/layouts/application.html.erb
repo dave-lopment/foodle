@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= nav_bar fixed: :top  do %>
+  <%= nav_bar fixed: :top,  responsive: true do %>
     <%= menu_group do %>
       <%= menu_item "Home", '#' %>
       <%= menu_item "PlaceHolder", '#' %>
@@ -22,7 +22,7 @@
         <% if current_user %>
             <%= menu_item "Log Out", '#' %>
         <% else %>
-            <%= menu_item "Log In", '#' %> 
+            <%= menu_item "Log In", '#' %>
         <% end %>
     <% end %>
   <% end %>
