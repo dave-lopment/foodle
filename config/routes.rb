@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'root_pages/home'
+
   devise_for :users
   resources :articles do
     member do
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
       put "dislike", to: "articles#downvote"
     end
   end
-  root 'users#index'
+  root 'root_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
