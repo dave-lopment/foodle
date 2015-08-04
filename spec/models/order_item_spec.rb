@@ -16,4 +16,13 @@ describe OrderItem do
     expect(orderItem).to be_valid
   end
 
+  it 'expect to be invalid with nil-article' do
+    orderItem = build(:order_item, article: nil)
+    expect(orderItem).not_to be_valid
+  end
+
+  it 'expect to be valid with normal article' do
+    orderItem = build(:order_item)
+    expect(orderItem).to be_valid
+  end
 end
