@@ -27,7 +27,7 @@ describe OrderItem do
   end
 
   it 'expect not to be valid with nil-order' do
-    orderItem = build(:order_item)
+    orderItem = build(:order_item, order: nil)
     expect(orderItem).not_to be_valid
   end
  

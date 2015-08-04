@@ -4,7 +4,7 @@ class OrderItem < ActiveRecord::Base
 
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :article_present
-  
+  validate :order_present  
   private
     
     def article_present
@@ -13,4 +13,9 @@ class OrderItem < ActiveRecord::Base
       end
     end
 
+    def order_present
+      if order.nil?
+        errors.add(:order, "is not a valid order.")
+      end
+    end
 end
