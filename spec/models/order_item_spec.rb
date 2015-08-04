@@ -25,5 +25,15 @@ describe OrderItem do
     orderItem = build(:order_item)
     expect(orderItem).to be_valid
   end
+
+  it 'expect not to be valid with nil-order' do
+    orderItem = build(:order_item)
+    expect(orderItem).not_to be_valid
+  end
+ 
+  it 'expect to be valid with normal order' do
+    orderItem = build(:order_item)
+    expect(orderItem).to be_valid
+  end
 end
 
