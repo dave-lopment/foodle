@@ -5,10 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'ffaker'
 
+Article.delete_all
 30.times do |n|
-  name = Faker::Name.name
-  description = "This is a delicious Article"
+  name = FFaker::Food.meat
+  description = FFaker::Food.ingredient
   price = n + 1
   Article.create(name: name,
                   description: description,
