@@ -10,7 +10,7 @@
   <%= nav_bar fixed: :top,  responsive: true do %>
     <%= menu_group do %>
       <%= menu_item "Home", root_path %>
-      <%= menu_item "PlaceHolder", '#' %>
+      <%= menu_item "All Users", users_path %>
       <%= drop_down "DropPlaceHolder" do %>
         <%= menu_item "Item 1", '#' %>
         <%= menu_item "Item 2", '#' %>
@@ -23,6 +23,7 @@
             <%= menu_item "Log Out", destroy_user_session_path, method: :delete %>
         <% else %>
             <%= menu_item "Log In", new_user_session_path %>
+            <%= menu_item "Sign Up", new_user_registration_path %>
         <% end %>
     <% end %>
   <% end %>
