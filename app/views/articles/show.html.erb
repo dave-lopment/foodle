@@ -1,0 +1,8 @@
+<h1> <%= @article.name %> </h1>
+<p> <%= @article.description %></p>
+<p>
+  <%= @article.price %> €
+  <%= link_to '#', class: "btn btn-default" do %>
+    <i class="glyphicon glyphicon-shopping-cart"></i>
+  <% end %>
+</p>

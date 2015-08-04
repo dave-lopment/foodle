@@ -5,8 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -33,6 +32,12 @@ gem "twitter-bootstrap-rails"
 gem 'faker'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
+
+gem 'sprockets-rails', '>=2.1.4'
+gem 'sass-rails', '~> 5.0.1'
+gem 'compass-rails', '~> 2.0.4'
+gem 'bootstrap-sass', '~> 3.3.5.1'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

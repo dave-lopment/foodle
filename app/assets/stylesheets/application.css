@@ -13,12 +13,17 @@
  *= require_tree .
  *= require_self
  */
- .articles {
-   list-style: none;
-   margin: 0;
-   li {
-     overflow: auto;
-     padding: 10px 0;
-     border-bottom: 1px solid $gray-lighter;
-   }
- }
+
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* Override Bootstrap 3 font locations so that glyphicons work */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+  url('../assets/glyphicons-halflings-regular.woff') format('woff'),
+  url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
+  url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
