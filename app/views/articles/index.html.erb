@@ -7,7 +7,7 @@
 
 <ul class="articles">
 
-  <%= @articles.each do |article| %>
+  <% @articles.each do |article| %>
     <li>
       <p><%=link_to article.name, article %>, <%= article.price %> € </p>
       <p><%=article.description %></p>
