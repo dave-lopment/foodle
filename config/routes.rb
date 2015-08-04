@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
+  root 'root_pages#home'
   devise_for :users
-  resources :users_admin, :controller => 'users', only: [:edit, :index, :show, :destroy, :update]
+  
+  # try this if routing bugs happen
+  # resources :users_admin, :controller => 'users', only: [:edit, :index, :show, :destroy, :update]
+  resources :users
 
+  # routes for acts_as_votable
   resources :articles do
     member do
       put "like", to: "articles#upvote"
@@ -11,7 +16,6 @@ Rails.application.routes.draw do
   end
 
 
-  root 'root_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
