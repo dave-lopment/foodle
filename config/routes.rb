@@ -5,8 +5,9 @@ Rails.application.routes.draw do
 
   # try this if routing bugs happen
   # resources :users_admin, :controller => 'users', only: [:edit, :index, :show, :destroy, :update]
-  
+
   resources :users
+  
 
   # routes for acts_as_votable
   resources :articles do

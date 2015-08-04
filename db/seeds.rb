@@ -5,3 +5,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+30.times do |n|
+  name = Faker::Name.name
+  description = "This is a delicious Article"
+  price = n + 1
+  Article.create(name: name,
+                  description: description,
+                  price: price,
+                  isVegetarian: false)
+end
