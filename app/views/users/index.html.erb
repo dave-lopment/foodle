@@ -1,8 +1,13 @@
-<h1>Alle Nutzer</h1>
-<ul>
+<h1>Zufriedene Nutzer von Foodle</h1>
+
+<%= will_paginate :previous_label => "Zurück", :next_label => "Weiter" %>
+
+<ul class="users">
   <% @users.each do |user| %>
     <li>
       <%= link_to user.name, user %>
     </li>
   <% end %>
 </ul>
+
+<%= will_paginate :previous_label => "Zurück", :next_label => "Weiter" %>
