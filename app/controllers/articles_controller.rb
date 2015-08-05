@@ -7,6 +7,10 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end 
+
   # upvote with help of acts_as_votable
   # def upvote
   #   @article = Article.find(param[:id])

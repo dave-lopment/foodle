@@ -8,8 +8,15 @@
 
     <% @articles.each do |article| %>
       <li>
-        <p><%=link_to article.name, article %>, <%= article.price %> € </p>
-        <p><%=article.description %></p>
+        <p><%=link_to article.name, article %></p>
+        <p><%=article.description %>
+        <span class = "pull-right" >
+          <%= article.price %> €
+          <%= link_to '#', :class => "btn btn-primary cart-btn" do %>
+            <i class="glyphicon glyphicon-shopping-cart"></i>
+          <% end %>
+        </span>
+        </p>
       </li>
     <% end %>
   </ul>

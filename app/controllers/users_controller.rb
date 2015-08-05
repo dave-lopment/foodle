@@ -12,4 +12,8 @@ class UsersController < ApplicationController
     #flash[:success] = "User deleted"
     redirect_to users_path
   end
+
+  def edit
+    @user = User.find(params[:id])
+  end 
 end

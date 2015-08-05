@@ -1,8 +1,11 @@
+<div class="col-md-4">
+
 <h1> <%= @article.name %> </h1>
 <p> <%= @article.description %></p>
-<p>
+<p class="pull-right">
   <%= @article.price %> €
-  <%= link_to '#', :class => "btn btn-primary" do %>
+  <%= link_to '#', :class => "btn btn-primary cart-btn" do %>
     <i class="glyphicon glyphicon-shopping-cart"></i>
   <% end %>
 </p>
+ </div>
