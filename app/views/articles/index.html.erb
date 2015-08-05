@@ -9,13 +9,21 @@
     <% @articles.each do |article| %>
       <li>
         <p><%=link_to article.name, article %></p>
-        <p><%=article.description %>
-        <span class = "pull-right" >
-          <%= article.price %> €
-          <%= link_to '#', :class => "btn btn-primary cart-btn" do %>
-            <i class="glyphicon glyphicon-shopping-cart"></i>
-          <% end %>
-        </span>
+        <p>
+          <%=article.description %>
+          <span class = "pull-right" >
+            <%= article.price %> €
+            <%= link_to '#', :class => "btn btn-primary cart-btn" do %>
+              <i class="glyphicon glyphicon-shopping-cart"></i>
+            <% end %>
+
+            <% if current_user.try(:admin?) %>
+              <%= link_to article, method: :delete,
+                data: { confirm: "You sure?" }, :class => "btn btn-danger" do %>
+                <i class="glyphicon glyphicon-remove"></i>
+              <% end %>
+            <% end %>
+          </span>
         </p>
       </li>
     <% end %>

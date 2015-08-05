@@ -9,7 +9,12 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-  end 
+  end
+
+  def destroy
+    Article.find(params[:id]).destroy
+    redirect_to articles_path
+  end
 
   # upvote with help of acts_as_votable
   # def upvote

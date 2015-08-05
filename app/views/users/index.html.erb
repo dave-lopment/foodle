@@ -1,19 +1,25 @@
 <h1>Zufriedene Nutzer von Foodle</h1>
 
 <%= will_paginate :previous_label => "Zurück", :next_label => "Weiter" %>
+  <ul class="users">
+    <% @users.each do |user| %>
+      <li>
 
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %>
-      <% if current_user.try(:admin?) && current_user != user  %>
-        <%= link_to user, method: :delete,
-          data: { confirm: "You sure?" }, :class => "btn btn-danger pull-right" do %>
-          <i class="glyphicon glyphicon-remove"></i>
+        <%= link_to user.name, user %>
+        <% if current_user.try(:admin?) && current_user != user  %>
+
+          <%= link_to user, method: :delete,
+            data: { confirm: "You sure?" }, :class => "btn btn-danger cart-btn pull-right" do %>
+            <i class="glyphicon glyphicon-remove"></i>
+          <% end %>
+
+          <%= link_to edit_user_path(user), :class => "btn btn-warning cart-btn pull-right" do %>
+            <i class="glyphicon glyphicon-edit"></i>
+          <% end %>
+
         <% end %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
 
+      </li>
+    <% end %>
+  </ul>
 <%= will_paginate :previous_label => "Zurück", :next_label => "Weiter" %>
