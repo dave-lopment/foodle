@@ -3,7 +3,7 @@
   = link_to "upvote", like_article_path(article), method: :put
   -->
 
-<%= will_paginate %>
+<%= will_paginate :previous_label => "Zurück", :next_label => "Weiter" %>
   <ul class="articles">
 
     <% @articles.each do |article| %>
@@ -13,4 +13,4 @@
       </li>
     <% end %>
   </ul>
-<%= will_paginate %>
+<%= will_paginate :previous_label => "Zurück", :next_label => "Weiter" %>
