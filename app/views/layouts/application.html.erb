@@ -12,10 +12,11 @@
       <%= menu_item "FOODLE", root_path %>
       <%= menu_item "Bestellen", articles_path %>
       <%= menu_item "Alle Nutzer", users_path %>
-      <%= drop_down "Placeholder" do %>
-        <%= menu_item "Item 1", '#' %>
-        <%= menu_item "Item 2", '#' %>
-        <%= menu_item "Item 3", '#' %>
+      <% if current_user.try(:admin?) %>
+        <%= drop_down "Admin" do %>
+        <%= menu_item "Nutzer", '#' %>
+        <%= menu_item "Artikel", '#' %>
+        <% end %>
       <% end %>
     <% end %>
 
