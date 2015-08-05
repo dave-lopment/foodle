@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # resources :users_admin, :controller => 'users', only: [:edit, :index, :show, :destroy, :update]
 
   resources :users, only: [:index, :show, :edit, :update]
+  resources :articles, only: [:index, :show, :edit, :update]
 
 
   # routes for acts_as_votable

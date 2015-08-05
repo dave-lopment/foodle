@@ -1,6 +1,32 @@
-<h1>Edit Article</h1>
+<div class="col-md-4 center-div">
+  <h1>Edit Article</h1>
 
-<%= link_to user, method: :delete,
-  data: { confirm: "You sure?" }, :class => "btn btn-danger pull-right" do %>
-  <i class="glyphicon glyphicon-remove"></i>
-<% end %>
+  <%= form_for(@article) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :price %>
+      <%= f.text_field :price, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.check_box :isVegetarian %>
+      <%= f.label :isVegetarian, " vegetarisch" %>
+    </div>
+
+    <%= f.submit "Save", class: "btn btn-primary pull-right" %>
+
+  <% end %>
+
+  <%= link_to "Delete", @article, method: :delete,
+    data: { confirm: "You sure?" }, :class => "btn btn-danger" %>
+</div>
