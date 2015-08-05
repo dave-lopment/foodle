@@ -1,47 +1,50 @@
-<h2>Sign up</h2>
+<div class="col-md-4 center-div">
+  <h2>Sign up</h2>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name),
+    :class => "form-horizontal") do |f| %>
+    <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, autofocus: true, :class => "form-control" %>
+    </div>
 
-  <div class="field">
-    <!-- <%= f.label :name %> <br /> -->
-    <%= f.text_field :name, :placeholder => "Name", autofocus: true %>
-  </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, :class => "form-control" %>
+    </div>
 
-  <div class="field">
-    <!-- <%= f.label :email %><br /> -->
-    <%= f.email_field :email, :placeholder => "Email"%>
-  </div>
+    <div class="form-group">
+      <%= f.label :street %>
+      <%= f.text_field :street, :class => "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.text_field :street, :placeholder => "Strate Hausnr" %>
+    <div class="form-group">
+        <%= f.label :postal %>
+        <%= f.text_field :postal, :class => "form-control" %>
+    </div>
 
-  <div class="field">
-    <!-- <%= f.label :postal %><br /> -->
-    <%= f.text_field :postal, :placeholder => "Postal Code"%>
-  </div>
+    <div class="form-group">
+        <%= f.label :city %>
+        <%= f.text_field :city, :class => "form-control"%>
+    </div>
 
-  <div class="field">
-    <!-- <%= f.label :city %><br /> -->
-    <%= f.text_field :city, :placeholder => "City"%>
-  </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "off", :class => "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="actions">
+      <%= f.submit "Sign up", :class => "btn btn-primary pull-right" %>
+    </div>
+  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
