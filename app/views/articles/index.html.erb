@@ -3,16 +3,14 @@
   = link_to "upvote", like_article_path(article), method: :put
   -->
 
-<%= will_paginate %>
+  <%= will_paginate %>
+    <ul class="articles">
 
-<ul class="articles">
-
-  <% @articles.each do |article| %>
-    <li>
-      <p><%=link_to article.name, article %>, <%= article.price %> € </p>
-      <p><%=article.description %></p>
-    </li>
-  <% end %>
-</ul>
-
-<%= will_paginate %>
+      <% @articles.each do |article| %>
+        <li>
+          <p><%=link_to article.name, article %>, <%= article.price %> € </p>
+          <p><%=article.description %></p>
+        </li>
+      <% end %>
+    </ul>
+  <%= will_paginate %>
