@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # try this if routing bugs happen
   # resources :users_admin, :controller => 'users', only: [:edit, :index, :show, :destroy, :update]
 
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :articles, only: [:index, :show, :edit, :update]
 
 
