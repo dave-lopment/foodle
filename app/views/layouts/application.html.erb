@@ -21,10 +21,10 @@
 
     <%= menu_group :pull => :right do %>
         <% if current_user %>
-            <%= menu_item "Log Out", destroy_user_session_path, method: :delete %>
+            <%= menu_item "Abmelden", destroy_user_session_path, method: :delete %>
         <% else %>
-            <%= menu_item "Log In", new_user_session_path %>
-            <%= menu_item "Sign Up", new_user_registration_path %>
+            <%= menu_item "Anmelden", new_user_session_path %>
+            <%= menu_item "Registrieren", new_user_registration_path %>
         <% end %>
     <% end %>
   <% end %>
