@@ -6,6 +6,12 @@
   <% @users.each do |user| %>
     <li>
       <%= link_to user.name, user %>
+      <% if current_user.try(:admin?) && current_user != user  %>
+        <%= link_to user, method: :delete,
+          data: { confirm: "You sure?" }, :class => "btn btn-danger pull-right" do %>
+          <i class="glyphicon glyphicon-remove"></i>
+        <% end %>
+      <% end %>
     </li>
   <% end %>
 </ul>

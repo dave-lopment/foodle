@@ -13,10 +13,7 @@
       <%= menu_item "Bestellen", articles_path %>
       <%= menu_item "Alle Nutzer", users_path %>
       <% if current_user.try(:admin?) %>
-        <%= drop_down "Admin" do %>
-        <%= menu_item "Nutzer", '#' %>
-        <%= menu_item "Artikel", '#' %>
-        <% end %>
+        <%= menu_item "Admin" %>
       <% end %>
     <% end %>
 
