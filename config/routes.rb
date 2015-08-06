@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'order_items/create'
+
+  get 'order_items/update'
+
+  get 'order_items/show'
+
+  get 'carts/show'
+
   root 'root_pages#home'
   devise_for :users
 

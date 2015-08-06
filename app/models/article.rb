@@ -1,6 +1,7 @@
 class Article < ActiveRecord::Base
   belongs_to :order
   belongs_to :category
+  has_many :order_items 
 
   acts_as_votable
   validates :name, presence: true
