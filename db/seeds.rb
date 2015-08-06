@@ -45,3 +45,11 @@ User.create!( name: "Peter Lustig",
               postal: "11111",
               email: "peter@lustig.de",
               admin: true)
+
+OrderStatus.delete_all
+OrderStatus.create! id: 1, name: "In Progess"
+OrderStatus.create! id: 2, name: "Placed"
+OrderStatus.create! id: 3, name: "Shipped"
+OrderStatus.create! id: 4, name: "Cancelled" 
+
+

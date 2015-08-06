@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root 'root_pages#home'
   devise_for :users
 
@@ -8,9 +9,9 @@ Rails.application.routes.draw do
 
   # create routes so that Devise is not used for these functions
   resources :users, only: [:index, :show, :edit, :update, :destroy]
-  
   resources :articles
-
+  resource :cart, only: [:show]
+  resources :order_items, only: [:create, :update, :destroy]  
 
   # routes for acts_as_votable
   resources :articles do
