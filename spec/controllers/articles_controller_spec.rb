@@ -64,4 +64,11 @@ RSpec.describe ArticlesController, type: :controller do
       end
     end
   end
+
+  describe "GET #edit" do
+    it "renders the :edit template" do
+      get :edit, id: create(:article)
+      expect(response).to render_template(:edit)
+    end
+  end
 end
