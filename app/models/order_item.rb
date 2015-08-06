@@ -5,6 +5,15 @@ class OrderItem < ActiveRecord::Base
   validates :quantity, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :article_present
   validate :order_present  
+  
+  def unit_price
+    if persisted?
+      self[:unit_price]
+    else
+      article.price
+    end
+  end
+
   private
     
     def article_present

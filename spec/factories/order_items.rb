@@ -2,9 +2,9 @@ FactoryGirl.define do
   factory :order_item do
     article {create(:article)}
     order {create(:order)}
-    unit_price "9.99"
+    unit_price nil
     quantity 1
-    total_price "9.99"
+    total_price nil
   end
 
 end
