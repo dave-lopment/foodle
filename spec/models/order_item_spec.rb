@@ -44,9 +44,10 @@ describe OrderItem do
 
   it 'expect order_item.total_price to be equal to quantity * unit_price after call of total_price-method' do
     orderItem = build(:order_item, quantity: 3)
-    # perhaps first call unit_price to set the unit_price
+    # perhaps first call unit_price
+    # orderItem.unit_price()
     orderItem.total_price()
-    expect(orderItem.total_price).to be_equal(orderItem.unit_price * orderItem.quantity)
+    expect(orderItem.total_price).to be_within(0.0).of(orderItem.unit_price * orderItem.quantity)
   end
 
   it 'expect unit price not to be nil after save'

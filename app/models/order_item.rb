@@ -14,6 +14,10 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
+  def total_price
+    unit_price * quantity
+  end
+
   private
     
     def article_present
