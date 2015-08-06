@@ -50,8 +50,19 @@ describe OrderItem do
     expect(orderItem.total_price).to be_within(0.0).of(orderItem.unit_price * orderItem.quantity)
   end
 
-  it 'expect unit price not to be nil after save'
+  it 'expect unit price not to be nil after save -> finalize method' do
+    orderItem = build(:order_item)
+    expect(orderItem[:unit_price]).to be_nil
+    orderItem.save()
+    expect(orderItem[:unit_price]).not_to be_nil
+  end
 
-  it 'expect total_price not to be nil after save'
+  it 'expect total_price not to be nil after save -> finalize method' do
+    orderItem = build(:order_item, quantity: 3)
+    expect(orderItem[:total_price]).to be_nil
+    orderItem.save()
+    expect(orderItem[:total_price]).not_to be_nil
+  end
+
 end
 
