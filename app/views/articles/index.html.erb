@@ -4,6 +4,9 @@
   -->
 
 <%= will_paginate :previous_label => "Zurück", :next_label => "Weiter" %>
+<%= link_to new_article_path, :class => "btn btn-success pull-right" do %>
+  <i class="glyphicon glyphicon-plus"></i>
+<% end %>
   <ul class="articles">
 
     <% @articles.each do |article| %>

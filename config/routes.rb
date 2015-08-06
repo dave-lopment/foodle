@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   # try this if routing bugs happen
   # resources :users_admin, :controller => 'users', only: [:edit, :index, :show, :destroy, :update]
 
+  # create routes so that Devise is not used for these functions
   resources :users, only: [:index, :show, :edit, :update, :destroy]
-  resources :articles, only: [:index, :show, :edit, :update]
+  
+  resources :articles
 
 
   # routes for acts_as_votable
