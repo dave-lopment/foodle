@@ -44,9 +44,7 @@ RSpec.describe ArticlesController, type: :controller do
     context "with valid params" do
       it "creates a new Article" do
         expect{
-          post :create, { article: attributes_for(:article),
-                          description: "desc", price: 1.99,
-                          isVegetarian: false }
+          post :create, { article: attributes_for(:article)}
         }.to change(Article, :count).by(1)
       end
     end
@@ -69,6 +67,15 @@ RSpec.describe ArticlesController, type: :controller do
     it "renders the :edit template" do
       get :edit, id: create(:article)
       expect(response).to render_template(:edit)
+    end
+  end
+
+  describe "POST #destroy" do
+    it "deletes an article" do
+      article = create(:article)
+      expect {
+        delete :destroy, :id => article.id
+      }.to change(Article, :count).by(-1)
     end
   end
 end
