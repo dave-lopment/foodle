@@ -32,12 +32,12 @@
       <%= f.label "Admin" %>
     </div>
 
+    <%= link_to "Abbrechen", :back, class: "btn btn-default" %>
     <%= f.submit "Speichern", class: "btn btn-primary pull-right" %>
 
   <% end %>
   <br/>
   <hr/>
-
   Account löschen?
   <span class="pull-right">
     <%= button_to "Ja, Account löschen", registration_path(current_user),

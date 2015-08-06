@@ -27,6 +27,9 @@
 
   <% end %>
 
-  <%= link_to "Delete", @article, method: :delete,
-    data: { confirm: "You sure?" }, :class => "btn btn-danger" %>
+  <%= link_to "Artikel Löschen", @article, method: :delete,
+    data: { confirm: "Artikel #{@article.name} löschen?" }, :class => "btn btn-danger" %>
+  <br/>
+  <br/>
+  <%= link_to "Abbrechen", :back, class: "btn btn-default" %>
 </div>

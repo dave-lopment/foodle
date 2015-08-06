@@ -9,7 +9,7 @@
         <% if current_user.try(:admin?) && current_user != user  %>
 
           <%= link_to user, method: :delete,
-            data: { confirm: "You sure?" }, :class => "btn btn-danger cart-btn pull-right" do %>
+            data: { confirm: "Nutzer #{user.name} löschen?" }, :class => "btn btn-danger cart-btn pull-right" do %>
             <i class="glyphicon glyphicon-remove"></i>
           <% end %>
 
