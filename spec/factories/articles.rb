@@ -6,10 +6,11 @@ FactoryGirl.define do
     description "What a wonderful article"
   end
 
-  trait :empty_article_attributes do
-    name ''
-    price 2.234
-    description ''
+  trait :fresh_article do
+    name nil
+    description nil
+    price nil
+    isVegetarian nil
   end
 
 end
