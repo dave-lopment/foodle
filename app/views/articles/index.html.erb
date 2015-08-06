@@ -17,9 +17,13 @@
           <%=article.description %>
           <span class = "pull-right" >
             <%= article.price %> €
-
-            <%= link_to '#', :class => "btn btn-primary cart-btn" do %>
-              <i class="glyphicon glyphicon-shopping-cart"></i>
+            
+            <%= form_for @order_item, remote: true do |f| %>
+                <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+                <%= f.hidden_field :article_id, value: article.id %>
+       	        <%= button_tag(type: 'submit', class: "btn btn-primary cart-btn") do %>
+                  <i class="glyphicon glyphicon-shopping-cart"></i>
+                <% end %>
             <% end %>
 
             <% if current_user.try(:admin?) %>
