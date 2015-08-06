@@ -84,4 +84,51 @@ RSpec.describe ArticlesController, type: :controller do
       }.to change(Article, :count).by(-1)
     end
   end
+
+  # describe "PUT #update" do
+  #   @article = create(:article)
+  #   let(:attr) do
+  #     { :name => 'New Name', :description => 'New Description yeah', :price => 99.99 }
+  #   end
+  #
+  #   before(:each) do
+  #     put :update, :id => @article.id, :article => attr
+  #     @article.reload
+  #   end
+  #   it { expect(response).to redirect_to(@article) }
+  #   it { expect(@article.name).to eq attr[:name] }
+  #   it { expect(@article.description).to eq attr[:description]}
+  #
+  #
+  # end
+
+  describe "PUT #update" do
+    let(:attr) do
+      { :name => 'New Name', :description => 'New Description yeah', :price => 90.20 }
+    end
+
+    before(:each) do
+      @article = create(:article)
+      put :update, :id => @article.id, :article => attr
+      @article.reload
+    end
+
+    it "renders the view of the article" do
+      expect(response).to redirect_to(@article)
+    end
+
+    it "updates the name attribute of the article" do
+      expect(@article.name).to eq attr[:name]
+    end
+
+    it "updates the description of the article" do
+      expect(@article.description).to eq attr[:description]
+    end
+
+    it "updates the price of the article" do
+      expect(@article.price).to eq attr[:price]
+
+    end
+  end
+
 end
