@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'order_items/create'
-
-  get 'order_items/update'
-
-  get 'order_items/show'
-
-  get 'carts/show'
 
   root 'root_pages#home'
   devise_for :users
@@ -15,7 +8,8 @@ Rails.application.routes.draw do
   # resources :users_admin, :controller => 'users', only: [:edit, :index, :show, :destroy, :update]
 
   resources :users
-  
+  resource :cart, only: [:show]
+  resources :order_items, only: [:create, :update, :destroy]  
 
   # routes for acts_as_votable
   resources :articles do
