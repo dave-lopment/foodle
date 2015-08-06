@@ -31,7 +31,7 @@ RSpec.describe ArticlesController, type: :controller do
   describe "GET #new" do
     it "assigns a new Article to @article" do
       get :new
-      expect(assigns[:article]).to be_a(Article)
+      expect(assigns(:article)).to be_a(Article)
     end
     it "renders the :new template" do
       get :new
@@ -68,9 +68,15 @@ RSpec.describe ArticlesController, type: :controller do
       get :edit, id: create(:article)
       expect(response).to render_template(:edit)
     end
+
+    it "assigns the requested article to @article" do
+      article = create(:article)
+      get :edit, id: article
+      expect(assigns(:article)).to eq(article)
+    end
   end
 
-  describe "POST #destroy" do
+  describe "DELETE #destroy" do
     it "deletes an article" do
       article = create(:article)
       expect {
