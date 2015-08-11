@@ -10,15 +10,6 @@ require 'ffaker'
 Article.delete_all
 User.delete_all
 
-30.times do |n|
-  name = FFaker::Food.meat
-  description = FFaker::Food.ingredient
-  price = n + 1
-  Article.create!(name: name,
-                  description: description,
-                  price: price,
-                  isVegetarian: false)
-end
 
 40.times do |n|
   name = FFaker::Name.name
@@ -46,10 +37,99 @@ User.create!( name: "Peter Lustig",
               email: "peter@lustig.de",
               admin: true)
 
+Category.delete_all
+
+@category = Category.create! name: "Vorspeise"
+6.times do |n|
+  name = FFaker::Food.meat
+  description = FFaker::Food.ingredient
+  price = n + 1
+  @category.articles.create!(name: name,
+                  description: description,
+                  price: price,
+                  isVegetarian: false)
+end
+
+@category = Category.create! name: "Salat"
+6.times do |n|
+  name = FFaker::Food.meat
+  description = FFaker::Food.ingredient
+  price = n + 1
+  @category.articles.create!(name: name,
+                  description: description,
+                  price: price,
+                  isVegetarian: false)
+end
+
+@category = Category.create! name: "Pizza"
+6.times do |n|
+  name = FFaker::Food.meat
+  description = FFaker::Food.ingredient
+  price = n + 1
+  @category.articles.create!(name: name,
+                  description: description,
+                  price: price,
+                  isVegetarian: false)
+end
+
+@category = Category.create! name: "Pasta"
+6.times do |n|
+  name = FFaker::Food.meat
+  description = FFaker::Food.ingredient
+  price = n + 1
+  @category.articles.create!(name: name,
+                  description: description,
+                  price: price,
+                  isVegetarian: false)
+end
+
+Category.create! name: "Lasagne"
+@category = Category.create! name: "Schwein"
+6.times do |n|
+  name = FFaker::Food.meat
+  description = FFaker::Food.ingredient
+  price = n + 1
+  @category.articles.create!(name: name,
+                  description: description,
+                  price: price,
+                  isVegetarian: false)
+end
+
+Category.create! name: "Rind"
+@category = Category.create! name: "Geflügel"
+6.times do |n|
+  name = FFaker::Food.meat
+  description = FFaker::Food.ingredient
+  price = n + 1
+  @category.articles.create!(name: name,
+                  description: description,
+                  price: price,
+                  isVegetarian: false)
+end
+
+@category = Category.create! name: "Dessert"
+6.times do |n|
+  name = FFaker::Food.meat
+  description = FFaker::Food.ingredient
+  price = n + 1
+  @category.articles.create!(name: name,
+                  description: description,
+                  price: price,
+                  isVegetarian: false)
+end
+
 OrderStatus.delete_all
 OrderStatus.create! id: 1, name: "In Progess"
 OrderStatus.create! id: 2, name: "Placed"
 OrderStatus.create! id: 3, name: "Shipped"
-OrderStatus.create! id: 4, name: "Cancelled" 
+OrderStatus.create! id: 4, name: "Cancelled"
 
-
+# 30.times do |n|
+#   name = FFaker::Food.meat
+#   description = FFaker::Food.ingredient
+#   price = n + 1
+#   Article.create!(name: name,
+#                   description: description,
+#                   price: price,
+#                   isVegetarian: false)
+# end

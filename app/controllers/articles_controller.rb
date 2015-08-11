@@ -13,7 +13,8 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.paginate(:page => params[:page], :per_page => 10)
+    @categories = Category.all
+    @articles = Article.filter(params[:filter]).paginate(:page => params[:page], :per_page => 10)
     @order_item = current_order.order_items.new
   end
 
