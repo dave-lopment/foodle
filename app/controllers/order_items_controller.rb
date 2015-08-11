@@ -7,6 +7,7 @@ class OrderItemsController < ApplicationController
   end
 
   def update
+    print "I am in update right now"
     @order = current_order
     @order_item = @order.order_items.find(params[:id])
     @order_item.update_attributes(order_item_params)
