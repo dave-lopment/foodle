@@ -43,7 +43,7 @@ Category.delete_all
 6.times do |n|
   name = FFaker::Food.meat
   description = FFaker::Food.ingredient
-  price = n + 1
+  price = n + 1.00
   @category.articles.create!(name: name,
                   description: description,
                   price: price,
@@ -54,7 +54,7 @@ end
 6.times do |n|
   name = FFaker::Food.meat
   description = FFaker::Food.ingredient
-  price = n + 1
+  price = n + 1.00
   @category.articles.create!(name: name,
                   description: description,
                   price: price,
@@ -65,7 +65,7 @@ end
 6.times do |n|
   name = FFaker::Food.meat
   description = FFaker::Food.ingredient
-  price = n + 1
+  price = n + 1.00
   @category.articles.create!(name: name,
                   description: description,
                   price: price,
@@ -76,7 +76,7 @@ end
 6.times do |n|
   name = FFaker::Food.meat
   description = FFaker::Food.ingredient
-  price = n + 1
+  price = n + 1.00
   @category.articles.create!(name: name,
                   description: description,
                   price: price,
@@ -88,7 +88,7 @@ Category.create! name: "Lasagne"
 6.times do |n|
   name = FFaker::Food.meat
   description = FFaker::Food.ingredient
-  price = n + 1
+  price = n + 1.00
   @category.articles.create!(name: name,
                   description: description,
                   price: price,
@@ -100,7 +100,7 @@ Category.create! name: "Rind"
 6.times do |n|
   name = FFaker::Food.meat
   description = FFaker::Food.ingredient
-  price = n + 1
+  price = n + 1.00
   @category.articles.create!(name: name,
                   description: description,
                   price: price,
@@ -111,7 +111,7 @@ end
 6.times do |n|
   name = FFaker::Food.meat
   description = FFaker::Food.ingredient
-  price = n + 1
+  price = n + 1.00
   @category.articles.create!(name: name,
                   description: description,
                   price: price,
@@ -127,7 +127,7 @@ OrderStatus.create! id: 4, name: "Cancelled"
 # 30.times do |n|
 #   name = FFaker::Food.meat
 #   description = FFaker::Food.ingredient
-#   price = n + 1
+#   price = n + 1.00
 #   Article.create!(name: name,
 #                   description: description,
 #                   price: price,
