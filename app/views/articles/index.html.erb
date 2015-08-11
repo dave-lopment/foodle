@@ -4,9 +4,11 @@
   -->
 
 <%= will_paginate :previous_label => "Zurück", :next_label => "Weiter" %>
-<%= link_to new_article_path, :class => "btn btn-success pull-right" do %>
-  <i class="glyphicon glyphicon-plus"></i>
-<% end %>
+<% if current_user.try(:admin?) %>
+  <%= link_to new_article_path, :class => "btn btn-success pull-right" do %>
+    <i class="glyphicon glyphicon-plus"></i>
+  <% end %>
+<% end %> 
   <ul class="articles">
 
     <% @articles.each do |article| %>
@@ -17,7 +19,7 @@
           <%=article.description %>
           <span class = "pull-right" >
             <%= article.price %> €
-            
+
             <%= form_for @order_item, remote: true do |f| %>
                 <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
                 <%= f.hidden_field :article_id, value: article.id %>
