@@ -14,13 +14,7 @@ class ArticlesController < ApplicationController
 
   def index
     @categories = Category.all
-    if params[:category]
-      @articles = Article.paginate(:page => params[:page], :per_page => 3)
-
-    else
-      @articles = Article.paginate(:page => params[:page], :per_page => 10)
-
-    end
+    @articles = Article.filter(params[:filter]).paginate(:page => params[:page], :per_page => 10)
     @order_item = current_order.order_items.new
   end
 

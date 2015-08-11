@@ -5,7 +5,7 @@
 <div class="btn-group">
   <%= link_to "Alle", articles_path, class: "btn btn-default" %>
   <% @categories.each do |category| %>
-    <%= link_to category.name, articles_path, class: "btn btn-default" %>
+    <%= link_to category.name, articles_path(filter: category.id), class: "btn btn-default" %>
   <% end %>
 </div>
 
@@ -23,8 +23,8 @@
       <li>
 
         <div class = "col-md-8" >
-          <p><%=link_to article.name, article %></p>
-          <p class="small"><%= article.category.name%> </p>
+          <p><%=link_to article.name, article %><%= article.category.name %></p>
+          <p class="small"> </p>
           <p><%=article.description %></p>
         </div>
 
