@@ -13,25 +13,33 @@
 
     <% @articles.each do |article| %>
       <li>
-        
-        <p><%=link_to article.name, article %></p>
-        <p>
-          <%=article.description %>
-          <span class = "col-md-4 pull-right" >
+        <div class = "row">
+        <div class = "col-md-8" >
+          <p><%=link_to article.name, article %></p>
+          <p><%=article.description %></p>
+        </div>
 
-            <%= form_for @order_item, remote: true do |f| %>
-              <div class = "col-xs-1">
-                <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+        <div class = "col-md-4" >
+
+          <%= form_for @order_item, remote: true do |f| %>
+            <div class = "col-md-4">
+              <div class = "col-md-12" >
+              <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
               </div>
-                <%= f.hidden_field :article_id, value: article.id %>
-                <%= article.price %> €
-       	        <%= button_tag(type: 'submit', class: "btn btn-primary cart-btn") do %>
-                  <i class="glyphicon glyphicon-shopping-cart"></i>
-                <% end %>
-            <% end %>
+            </div>
+            <div class = "col-md-5">
+              <div class = "pull-right">
+              <%= f.hidden_field :article_id, value: article.id %>
+              <%= article.price %> €
+     	        <%= button_tag(type: 'submit', class: "btn btn-primary cart-btn") do %>
+                <i class="glyphicon glyphicon-shopping-cart"></i>
+              <% end %>
+              </div>
+            </div>
+          <% end %>
 
-            <% if current_user.try(:admin?) %>
-
+          <div class="col-md-3">
+          <% if current_user.try(:admin?) %>
               <%= link_to edit_article_path(article), :class => "btn btn-warning cart-btn" do %>
                 <i class="glyphicon glyphicon-edit"></i>
               <% end %>
@@ -40,11 +48,11 @@
                 data: { confirm: "Artikel #{article.name} löschen?" }, :class => "btn btn-danger cart-btn" do %>
                 <i class="glyphicon glyphicon-remove"></i>
               <% end %>
+            </div>
 
-            <% end %>
-          </span>
-        </p>
-
+          <% end %>
+        </div>
+        </div>
       </li>
     <% end %>
   </ul>
