@@ -4,8 +4,8 @@
   -->
 <div class="btn-group">
   <%= link_to "Alle", articles_path, class: "btn btn-default" %>
-  <%= form_for @categories do |category| %>
-    <%= category.submit category.name, articles_path, class: "btn btn-default" %>
+  <% @categories.each do |category| %>
+    <%= link_to category.name, articles_path, class: "btn btn-default" %>
   <% end %>
 </div>
 
