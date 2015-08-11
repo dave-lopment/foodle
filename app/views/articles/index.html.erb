@@ -8,21 +8,23 @@
   <%= link_to new_article_path, :class => "btn btn-success pull-right" do %>
     <i class="glyphicon glyphicon-plus"></i>
   <% end %>
-<% end %> 
+<% end %>
   <ul class="articles">
 
     <% @articles.each do |article| %>
       <li>
-
+        
         <p><%=link_to article.name, article %></p>
         <p>
           <%=article.description %>
-          <span class = "pull-right" >
-            <%= article.price %> €
+          <span class = "col-md-4 pull-right" >
 
             <%= form_for @order_item, remote: true do |f| %>
+              <div class = "col-xs-1">
                 <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+              </div>
                 <%= f.hidden_field :article_id, value: article.id %>
+                <%= article.price %> €
        	        <%= button_tag(type: 'submit', class: "btn btn-primary cart-btn") do %>
                   <i class="glyphicon glyphicon-shopping-cart"></i>
                 <% end %>
