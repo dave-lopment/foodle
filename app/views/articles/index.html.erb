@@ -2,8 +2,8 @@
 @links.each do |article|
   = link_to "upvote", like_article_path(article), method: :put
   -->
-<div class="btn-group">
-  <%= link_to "Alle", articles_path, class: "btn btn-default category-btn" %>
+<div class="btn-group category-btns">
+  <%= link_to "Alle", articles_path, class: "btn btn-default" %>
   <% @categories.each do |category| %>
     <%= link_to category.name, articles_path(filter: category.id), class: "btn btn-default category-btn" %>
   <% end %>
@@ -46,7 +46,7 @@
           <% end %>
 
           <div class="col-md-3">
-          <% if current_user.try(:admin?) %>
+            <% if current_user.try(:admin?) %>
               <%= link_to edit_article_path(article), :class => "btn btn-warning cart-btn" do %>
                 <i class="glyphicon glyphicon-edit"></i>
               <% end %>
@@ -54,8 +54,8 @@
               <%= link_to article, method: :delete,
                 data: { confirm: "Artikel #{article.name} löschen?" }, :class => "btn btn-danger cart-btn" do %>
                 <i class="glyphicon glyphicon-remove"></i>
-              <% end %>
-            </div>
+            <% end %>
+          </div>
 
           <% end %>
         </div>
