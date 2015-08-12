@@ -3,15 +3,12 @@
   = link_to "upvote", like_article_path(article), method: :put
   -->
 <div class="btn-group">
-  <%= link_to "Alle", articles_path, class: "btn btn-default" %>
+  <%= link_to "Alle", articles_path, class: "btn btn-default category-btn" %>
   <% @categories.each do |category| %>
-    <%= link_to category.name, articles_path(filter: category.id), class: "btn btn-default" %>
+    <%= link_to category.name, articles_path(filter: category.id), class: "btn btn-default category-btn" %>
   <% end %>
 </div>
 
-</br>
-</br>
-</br>
 
 <% if current_user.try(:admin?) %>
   <%= link_to new_article_path, :class => "btn btn-success pull-right" do %>
