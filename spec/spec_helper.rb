@@ -22,6 +22,9 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'factory_girl_rails'
 require 'database_cleaner'
 
+require 'capybara/rspec'
+require 'capybara/rails'
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   DatabaseCleaner.strategy = :truncation

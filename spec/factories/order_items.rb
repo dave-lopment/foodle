@@ -4,7 +4,6 @@ FactoryGirl.define do
     order {create(:order)}
     unit_price nil
     quantity 1
-    total_price nil
   end
 
 end
