@@ -1,4 +1,5 @@
 class Article < ActiveRecord::Base
+  acts_as_votable
   belongs_to :order
   belongs_to :category
   has_many :order_items
@@ -10,6 +11,6 @@ class Article < ActiveRecord::Base
   validates :price, :format => { :with => /\A\d+(?:\.\d{0,2})?\z/ },
     :numericality => {:greater_than => 0, :less_than => 1000}
   validates :description, presence: true
-  validates :category_id, presence: true 
+  validates :category_id, presence: true
 
 end

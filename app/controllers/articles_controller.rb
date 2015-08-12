@@ -20,6 +20,7 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @order_item = current_order.order_items.new
   end
 
   def edit
@@ -41,11 +42,17 @@ class ArticlesController < ApplicationController
   end
 
   # upvote with help of acts_as_votable
-  # def upvote
-  #   @article = Article.find(param[:id])
-  #   @article.upvote_by current_user
-  #   redirect_to articles_path
-  # end
+  def upvote
+    @article = Article.find(params[:id])
+    @article.liked_by current_user
+    redirect_to article_path
+  end
+
+  def downvote
+    @article = Article.find(params[:id])
+    @article.downvote_by current_user
+    redirect_to article_path
+  end
 
   private
 
