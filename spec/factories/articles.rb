@@ -3,6 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |i| "Artikel#{i}"}
     sequence(:price) { |i| "#{i}.99"}
     isVegetarian false
+    category_id 24
     description "What a wonderful article"
   end
 
