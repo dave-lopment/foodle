@@ -21,4 +21,16 @@ describe Category do
     expect(category).not_to be_valid
   end
 
+  context "destroy" do
+    it "destroys its articles when itself gets destroyed" do
+      @category = create(:category)
+      @article1 = @category.articles.create( name: "i will be deleted 1",
+                                    price: 9.99,
+                                    description: "a description 1")
+      @article2 = @category.articles.create( name: "i will be deleted 2",
+                                    price: 9.99,
+                                    description: "a description 2")
+      expect{Category.destroy(@category)}.to change(Article, :count).from(2).to(0)
+    end
+  end
 end
