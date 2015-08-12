@@ -1,11 +1,23 @@
 <div class="col-md-4">
 
-<h1> <%= @article.name %> </h1>
+<h1> <%= @article.name %> <br/><small><%= @article.category.name%></small></h1>
 <p> <%= @article.description %></p>
 <p class="pull-right">
   <%= @article.price %> €
   <%= link_to '#', :class => "btn btn-primary cart-btn" do %>
     <i class="glyphicon glyphicon-shopping-cart"></i>
+  <% end %>
+  <% if current_user.try(:admin?) %>
+      <%= link_to edit_article_path(@article), :class => "btn btn-warning cart-btn" do %>
+        <i class="glyphicon glyphicon-edit"></i>
+      <% end %>
+
+      <%= link_to @article, method: :delete,
+        data: { confirm: "Artikel #{@article.name} löschen?" }, :class => "btn btn-danger cart-btn" do %>
+        <i class="glyphicon glyphicon-remove"></i>
+      <% end %>
+    </div>
+
   <% end %>
 </p>
  </div>
