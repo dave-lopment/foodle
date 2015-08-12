@@ -42,7 +42,9 @@ Category.delete_all
 @category = Category.create! name: "Vorspeise"
 6.times do |n|
   name = FFaker::Food.meat
-  description = FFaker::Food.ingredient
+  description = "This is a very long description. In fact, it is so long, that
+  Foodle will hopefully not display its full text. Usually a description
+  contains ingredients and things like that. Now have som bla's: bla bla bla."
   price = n + 1.00
   @category.articles.create!(name: name,
                   description: description,

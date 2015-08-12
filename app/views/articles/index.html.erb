@@ -24,9 +24,9 @@
       <li>
 
         <div class = "col-md-8" >
-          <p><%=link_to article.name, article %><%= article.category.name %></p>
-          <p class="small"> </p>
-          <p><%=article.description %></p>
+          <p><%=link_to article.name, article %></p>
+          <p class="small"><%= article.category.name %></p>
+          <p><%=article.description.truncate_words(22) %></p>
         </div>
 
         <div class = "col-md-4" >
