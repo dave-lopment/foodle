@@ -2,6 +2,8 @@
   <h1>Create new Article</h1>
   <%= form_for (@article) do |f| %>
 
+    <%= f.select :category_id, Category.all.map{|c| [c.name, "#{c.id}"]} %>
+
     <div class="form-group">
       <%= f.label :name, 'Name' %>
       <%= f.text_field :name, class: "form-control" %>
@@ -21,7 +23,6 @@
       <%= f.check_box :isVegetarian %>
       <%= f.label :isVegetarian, " vegetarisch" %>
     </div>
-
     <%= f.submit "Erstellen", class: "btn btn-primary pull-right" %>
 
   <% end %>
