@@ -21,7 +21,7 @@ ENV["Rails_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'factory_girl_rails'
 require 'database_cleaner'
-
+require 'devise'	
 require 'capybara/rspec'
 require 'capybara/rails'
 
