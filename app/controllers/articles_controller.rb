@@ -57,6 +57,6 @@ class ArticlesController < ApplicationController
   private
 
     def article_params
-      params.require(:article).permit(:name, :description, :price, :isVegetarian, :category_id)
+      params.require(:article).permit(:name, :description, :price, :isVegetarian, :category_id, :img_name)
     end
 end
