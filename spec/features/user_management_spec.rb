@@ -81,7 +81,7 @@ feature "the login process" do
   end
   
   # Refactor SignIn with Warden Gem
-  scenario "User Function Links should direct to right place" do
+  scenario "expect edit-user link direct to the right url" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
     visit new_user_session_path
     expect(page).to have_content 'Anmeldung'
@@ -92,6 +92,45 @@ feature "the login process" do
     click_button 'Anmelden'
     click_on 'Profil bearbeiten'
     expect(current_path).to eq(edit_user_path(user))
+  end
+
+  scenario "expect edit-password link direct to the right url" do
+  user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => user.email
+      fill_in 'Passwort', :with => user.password
+    end
+    click_button 'Anmelden'
+    click_on 'Passwort ändern'
+    expect(current_path).to eq(edit_user_registration_path(user))
+  end
+
+  scenario "expect delete-button to be in user-edit" do
+  user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => user.email
+      fill_in 'Passwort', :with => user.password
+    end
+    click_button 'Anmelden'
+    click_on 'Profil bearbeiten'
+    expect(page).to have_button('Ja, Account löschen')
+  end
+
+  scenario "expect Alle-Nutzer to link to the right path" do
+  user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => user.email
+      fill_in 'Passwort', :with => user.password
+    end
+    click_button 'Anmelden'
+    click_on 'Alle Nutzer'
+    expect(current_path).to eq(users_path)
   end
 end
 

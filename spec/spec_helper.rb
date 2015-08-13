@@ -28,6 +28,7 @@ require 'capybara/rails'
 RSpec.configure do |config|
   config.include Warden::Test::ControllerHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
+  config.include Devise::TestHelpers, type: :controller
   DatabaseCleaner.strategy = :truncation
   config.before(:suite) do 
     begin 
@@ -36,8 +37,11 @@ RSpec.configure do |config|
     ensure
       DatabaseCleaner.clean
     end
+  config.after do
+    Warden.test_reset!
+  end
     def sign_in(user)
-      warden.set_user(user)
+      Warden.set_user(user)
     end
   end
   # rspec-expectations config goes here. You can use an alternate
