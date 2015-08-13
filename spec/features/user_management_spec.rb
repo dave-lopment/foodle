@@ -189,31 +189,41 @@ feature "the login process" do
     expect(page).not_to have_link('', :href => user_path(user2), :count => 2)
   end
 
-  scenario "expect Bestellen Button in Navbar links to correct path"
+  scenario "expect Bestellen Button in Navbar links to correct path" do
+    visit new_user_session_path
+    click_on 'Bestellen'
+    expect(current_path).to eq(articles_path)
+  end
 
-  scenario "expect Admin to have a button to add an article"
+  scenario "expect Admin to have a button to add an article" do
+  admin = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', admin: true    })
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => admin.email
+      fill_in 'Passwort', :with => admin.password
+    end
+    click_button 'Anmelden'
+    click_on 'Bestellen'
+    expect(page).to have_link('', :href => new_article_path)
+  end
 
   scenario "expect Admin to have a button to edit an article"
 
   scenario "expect Admin to have a button to delete an article"
 
-  scenario "expect User not to have a button to add an article"
-
-  scenario "expect User not to have a button to edit an article"
-
-  scenario "expect User not to have a button to delete an article"
-    
-  scenario "expect to have a add to cart button (submit)"
-
-  scenario "expect Bestellen Button in Navbar links to correct path"
-
-  scenario "expect Admin to have a button to add an article"
-
-  scenario "expect Admin to have a button to edit an article"
-
-  scenario "expect Admin to have a button to delete an article"
-
-  scenario "expect User not to have a button to add an article"
+  scenario "expect User not to have a button to add an article" do
+  user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'})
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => user.email
+      fill_in 'Passwort', :with => user.password
+    end
+    click_button 'Anmelden'
+    click_on 'Bestellen'
+    expect(page).not_to have_link('', :href => new_article_path)
+  end
 
   scenario "expect User not to have a button to edit an article"
 
@@ -221,5 +231,6 @@ feature "the login process" do
     
   scenario "expect to have an quantity input"
 
+  scenario "expect to have a add to cart button (submit)"
 
 end
