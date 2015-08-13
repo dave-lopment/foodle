@@ -188,6 +188,38 @@ feature "the login process" do
     click_on 'Alle Nutzer'
     expect(page).not_to have_link('', :href => user_path(user2), :count => 2)
   end
-end
 
-      
+  scenario "expect Bestellen Button in Navbar links to correct path"
+
+  scenario "expect Admin to have a button to add an article"
+
+  scenario "expect Admin to have a button to edit an article"
+
+  scenario "expect Admin to have a button to delete an article"
+
+  scenario "expect User not to have a button to add an article"
+
+  scenario "expect User not to have a button to edit an article"
+
+  scenario "expect User not to have a button to delete an article"
+    
+  scenario "expect to have a add to cart button (submit)"
+
+  scenario "expect Bestellen Button in Navbar links to correct path"
+
+  scenario "expect Admin to have a button to add an article"
+
+  scenario "expect Admin to have a button to edit an article"
+
+  scenario "expect Admin to have a button to delete an article"
+
+  scenario "expect User not to have a button to add an article"
+
+  scenario "expect User not to have a button to edit an article"
+
+  scenario "expect User not to have a button to delete an article"
+    
+  scenario "expect to have an quantity input"
+
+
+end
