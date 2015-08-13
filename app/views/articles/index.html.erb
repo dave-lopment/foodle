@@ -21,8 +21,10 @@
   <% @articles.each do |article| %>
     <li>
 
-      <div class = "col-md-7" >
-        <%= image_tag article.img_name if article.img_name? %>
+      <div class = "col-md-2" >
+        <%= image_tag(article.img_name, class: "food-img") if article.img_name? %>
+      </div>
+      <div class = "col-md-5">
         <p><%=link_to article.name, article %></p>
         <p class="small"><%= article.category.name %></p>
         <p><%=article.description.truncate_words(22) %></p>
