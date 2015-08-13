@@ -30,12 +30,20 @@ User.delete_all
 end
 
 User.create!( name: "Peter Lustig",
+              email: "peter@lustig.de",
               password: "12345678",
               street: "Der Admin-Garten",
               city: "Stadtmin",
               postal: "11111",
-              email: "peter@lustig.de",
               admin: true)
+
+User.create!( name: "Peter Unlustig",
+              email: "normal@user.de",
+              password: "12345678",
+              street: "Der Admin-Garten",
+              city: "Stadtmin",
+              postal: "11111",
+              admin: false)
 
 Category.delete_all
 
