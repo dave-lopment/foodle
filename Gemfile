@@ -62,4 +62,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara', '2.4.4'
   gem 'warden-rspec-rails', '0.1.0'
+
+  gem 'carrierwave',             '0.10.0'
+  gem 'mini_magick',             '3.8.0'
+  gem 'fog',                     '1.23.0'
 end
