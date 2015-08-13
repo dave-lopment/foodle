@@ -49,7 +49,8 @@ Category.delete_all
   @category.articles.create!(name: name,
                   description: description,
                   price: price,
-                  isVegetarian: false)
+                  isVegetarian: false,
+                  img_name: "vorspeise.jpg")
 end
 
 @category = Category.create! name: "Salat"

@@ -22,6 +22,7 @@
     <li>
 
       <div class = "col-md-7" >
+        <%= image_tag article.img_name if article.img_name? %>
         <p><%=link_to article.name, article %></p>
         <p class="small"><%= article.category.name %></p>
         <p><%=article.description.truncate_words(22) %></p>

@@ -3,6 +3,7 @@ class Article < ActiveRecord::Base
   belongs_to :order
   belongs_to :category
   has_many :order_items
+  mount_uploader :picture, PictureUploader
 
   scope :filter, ->(id){where('category_id = ?', id) if id.present?}
 
@@ -12,5 +13,16 @@ class Article < ActiveRecord::Base
     :numericality => {:greater_than => 0, :less_than => 1000}
   validates :description, presence: true
   validates :category_id, presence: true
+  validate :picture_size
+
+  private
+
+    # Validates the size of an uploaded picture.
+    def picture_size
+      if picture.size > 5.megabytes
+        errors.add(:picture, "should be less than 5MB")
+      end
+    end
+
 
 end
