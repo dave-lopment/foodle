@@ -1,0 +1,24 @@
+<h1>Bestellung bestätigen</h1>
+<h2>Liefer-Adresse</h2>
+<%= form_tag do %>
+  <div class="form-group col-md-12">
+    <%= label_tag 'Straße & Hausnummer' %>
+    <%= text_field_tag(@street, (current_user.street if current_user), class: "form-control") %>
+  </div>
+
+  <div class="form-group col-md-2">
+    <%= label_tag 'PLZ' %>
+    <%= text_field_tag(@postal, (current_user.postal if current_user), class: "form-control") %>
+  </div>
+
+  <div class="form-group col-md-10">
+    <%= label_tag 'Ort' %>
+    <%= text_field_tag(@city, (current_user.city if current_user), class: "form-control") %>
+  </div>
+
+  <h2>Bezahl-Methode</h2>
+<% end %>
+
+<%= link_to okay_okay_path, :class => "btn btn-success cart-btn pull-right" do %>
+  <i class="glyphicon glyphicon-ok"> Bestellen</i>
+<% end %>

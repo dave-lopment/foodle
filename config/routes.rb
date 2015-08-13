@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :articles
   resource :cart, only: [:show]
-  resources :order_items, only: [:create, :update, :destroy]  
+  resources :order_items, only: [:create, :update, :destroy]
 
   # routes for acts_as_votable
   resources :articles do
@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       put "dislike", to: "articles#downvote"
     end
   end
+
+  get 'okay', to: 'carts#okay'
+  get 'okay_okay', to: 'carts#okay_okay'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -4,7 +4,7 @@
       <h4><%= article.name %></h4>
     </div>
     <div class="col-xs-4">
-      
+
       <%= form_for order_item, remote: true do |f| %>
         <h4 class="text-right">Einzelpreis: <span style="color: green"><%= order_item.unit_price %> €</span></h4>
         <div class="row">

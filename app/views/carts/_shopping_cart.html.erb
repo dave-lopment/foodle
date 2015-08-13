@@ -9,10 +9,15 @@
 <% end %>
 <% if @order_items.size == 0 %>
   <p class="text-center">
-    Warenkorb leer. <%= link_to "Hier", root_path %> Artikel hinzufügen.
+    Warenkorb leer. <%= link_to "Hier", articles_path %> Artikel hinzufügen.
   </p>
 <% else %>
   <% @order_items.each do |order_item| %>
     <%= render 'carts/cart_row', article: order_item.article, order_item: order_item, show_total: true %>
   <% end %>
 <% end %>
+<div>
+  <%= link_to okay_path, :class => "btn btn-success cart-btn pull-right" do %>
+    <i class="glyphicon glyphicon-ok"> Bestellen</i>
+  <% end %>
+</div>

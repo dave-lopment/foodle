@@ -129,10 +129,11 @@ end
 end
 
 OrderStatus.delete_all
-OrderStatus.create! id: 1, name: "In Progess"
-OrderStatus.create! id: 2, name: "Placed"
-OrderStatus.create! id: 3, name: "Shipped"
-OrderStatus.create! id: 4, name: "Cancelled"
+OrderStatus.create! id: 1, name: "In Erstellung"
+OrderStatus.create! id: 2, name: "Abgeschickt"
+OrderStatus.create! id: 3, name: "In Bearbeitung"
+OrderStatus.create! id: 4, name: "Abgeschickt"
+OrderStatus.create! id: 5, name: "Storniert"
 
 # 30.times do |n|
 #   name = FFaker::Food.meat
