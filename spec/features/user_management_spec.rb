@@ -189,9 +189,11 @@ feature "the login process" do
     expect(page).not_to have_link('', :href => user_path(user2), :count => 2)
   end
 
-  scenario "expect to have a add to cart button (submit)"
-
-  scenario "expect Bestellen Button in Navbar links to correct path"
+  scenario "expect Bestellen Button in Navbar links to correct path" do
+    visit new_user_session_path
+    click_on 'Bestellen'
+    expect(current_path).to eq(articles_path)
+  end
 
   scenario "expect Admin to have a button to add an article" do
   admin = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', admin: true    })
@@ -229,5 +231,6 @@ feature "the login process" do
     
   scenario "expect to have an quantity input"
 
+  scenario "expect to have a add to cart button (submit)"
 
 end
