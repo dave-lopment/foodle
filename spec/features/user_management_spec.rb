@@ -132,6 +132,94 @@ feature "the login process" do
     click_on 'Alle Nutzer'
     expect(current_path).to eq(users_path)
   end
-end
 
-      
+  scenario "expect Admin to have edit-button in Alle Nutzer" do
+  admin = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', admin: true    })
+  user = FactoryGirl.create(:user)
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => admin.email
+      fill_in 'Passwort', :with => admin.password
+    end
+    click_button 'Anmelden'
+    click_on 'Alle Nutzer'
+    expect(page).to have_link('', :href => edit_user_path(user))
+  end
+
+  scenario "expect Admin to have delete-button in Alle Nutzer" do
+  admin = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', admin: true    })
+  user = FactoryGirl.create(:user)
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => admin.email
+      fill_in 'Passwort', :with => admin.password
+    end
+    click_button 'Anmelden'
+    click_on 'Alle Nutzer'
+    expect(page).to have_link('', :href => user_path(user), :count => 2)
+  end
+
+  scenario "expect User not to have edit-button in Alle Nutzer" do
+  user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
+  user2 = FactoryGirl.create(:user)
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => user.email
+      fill_in 'Passwort', :with => user.password
+    end
+    click_button 'Anmelden'
+    click_on 'Alle Nutzer'
+    expect(page).not_to have_link('', :href => edit_user_path(user2))
+  end
+
+  scenario "expect User not to have delete-button in Aller Nutzer" do
+  user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
+  user2 = FactoryGirl.create(:user)
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => user.email
+      fill_in 'Passwort', :with => user.password
+    end
+    click_button 'Anmelden'
+    click_on 'Alle Nutzer'
+    expect(page).not_to have_link('', :href => user_path(user2), :count => 2)
+  end
+
+  scenario "expect Bestellen Button in Navbar links to correct path"
+
+  scenario "expect Admin to have a button to add an article"
+
+  scenario "expect Admin to have a button to edit an article"
+
+  scenario "expect Admin to have a button to delete an article"
+
+  scenario "expect User not to have a button to add an article"
+
+  scenario "expect User not to have a button to edit an article"
+
+  scenario "expect User not to have a button to delete an article"
+    
+  scenario "expect to have a add to cart button (submit)"
+
+  scenario "expect Bestellen Button in Navbar links to correct path"
+
+  scenario "expect Admin to have a button to add an article"
+
+  scenario "expect Admin to have a button to edit an article"
+
+  scenario "expect Admin to have a button to delete an article"
+
+  scenario "expect User not to have a button to add an article"
+
+  scenario "expect User not to have a button to edit an article"
+
+  scenario "expect User not to have a button to delete an article"
+    
+  scenario "expect to have an quantity input"
+
+
+end
