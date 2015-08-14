@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 feature "the login process" do 
+ 
+  def log_in_as(user)
+    visit new_user_session_path
+    expect(page).to have_content 'Anmeldung'
+    within("#new_user") do
+      fill_in 'E-Mail', :with => user.email
+      fill_in 'Passwort', :with =>user.password
+    end
+    click_button 'Anmelden'
+  end
 
   scenario "sign in with wrong credentials" do
     visit new_user_session_path
@@ -15,49 +25,25 @@ feature "the login process" do
 
   scenario "sign in" do
     user = FactoryGirl.create(:user, {email: "peter@lustig.de"})
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => "peter@lustig.de"
-      fill_in 'Passwort', :with => 'password'
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     expect(page).to have_content 'Willkommen bei Foodle!'
   end
 
   scenario "admin user got admin-flag in navbar" do
     adminUser = FactoryGirl.create(:user, {email: "peter@lustig.de", password: "12345678", admin: true})
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => adminUser.email
-      fill_in 'Passwort', :with => adminUser.password
-    end
-    click_button 'Anmelden'
+    log_in_as(adminUser)
     expect(page).to have_content '(Admin)'
   end
 
   scenario "normal user got no admin-flag in navbar" do
     user = FactoryGirl.create(:user, {email: "user@example.de", password: "password"})
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with =>user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     expect(page).not_to have_content '(Admin)'
   end
 
   scenario "Logged in user got account functions" do
     user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     expect(page).to have_content 'Account'
     expect(page).to have_content 'Profil bearbeiten'
     expect(page).to have_content 'Passwort ändern'
@@ -68,13 +54,7 @@ feature "the login process" do
 
   scenario "After log out user functions should be dissappeared" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     click_on 'Abmelden'
     expect(page).to have_content 'Anmelden'
     expect(page).to have_content 'Registrieren'
@@ -83,52 +63,28 @@ feature "the login process" do
   # Refactor SignIn with Warden Gem
   scenario "expect edit-user link direct to the right url" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     click_on 'Profil bearbeiten'
     expect(current_path).to eq(edit_user_path(user))
   end
 
   scenario "expect edit-password link direct to the right url" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     click_on 'Passwort ändern'
     expect(current_path).to eq(edit_user_registration_path(user))
   end
 
   scenario "expect delete-button to be in user-edit" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     click_on 'Profil bearbeiten'
     expect(page).to have_button('Ja, Account löschen')
   end
 
   scenario "expect Alle-Nutzer to link to the right path" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     click_on 'Alle Nutzer'
     expect(current_path).to eq(users_path)
   end
@@ -136,13 +92,7 @@ feature "the login process" do
   scenario "expect Admin to have edit-button in Alle Nutzer" do
   admin = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', admin: true    })
   user = FactoryGirl.create(:user)
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => admin.email
-      fill_in 'Passwort', :with => admin.password
-    end
-    click_button 'Anmelden'
+    log_in_as(admin)
     click_on 'Alle Nutzer'
     expect(page).to have_link('', :href => edit_user_path(user))
   end
@@ -150,13 +100,7 @@ feature "the login process" do
   scenario "expect Admin to have delete-button in Alle Nutzer" do
   admin = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', admin: true    })
   user = FactoryGirl.create(:user)
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => admin.email
-      fill_in 'Passwort', :with => admin.password
-    end
-    click_button 'Anmelden'
+    log_in_as(admin)
     click_on 'Alle Nutzer'
     expect(page).to have_link('', :href => user_path(user), :count => 2)
   end
@@ -164,13 +108,7 @@ feature "the login process" do
   scenario "expect User not to have edit-button in Alle Nutzer" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
   user2 = FactoryGirl.create(:user)
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     click_on 'Alle Nutzer'
     expect(page).not_to have_link('', :href => edit_user_path(user2))
   end
@@ -178,13 +116,7 @@ feature "the login process" do
   scenario "expect User not to have delete-button in Aller Nutzer" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })
   user2 = FactoryGirl.create(:user)
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     click_on 'Alle Nutzer'
     expect(page).not_to have_link('', :href => user_path(user2), :count => 2)
   end
@@ -197,13 +129,7 @@ feature "the login process" do
 
   scenario "expect Admin to have a button to add an article" do
   admin = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', admin: true    })
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => admin.email
-      fill_in 'Passwort', :with => admin.password
-    end
-    click_button 'Anmelden'
+    log_in_as(admin)
     click_on 'Bestellen'
     expect(page).to have_link('', :href => new_article_path)
   end
@@ -214,13 +140,7 @@ feature "the login process" do
 
   scenario "expect User not to have a button to add an article" do
   user = FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'})
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
+    log_in_as(user)
     click_on 'Bestellen'
     expect(page).not_to have_link('', :href => new_article_path)
   end
