@@ -1,20 +1,20 @@
 require 'rails_helper'
   
   RSpec.describe OrderItemsController, type: :controller do
-  
-  it "Add OrderItem to Basket"
+ 
+  it "Expect to add article to cart after clicking the add button"
 
-  it "Add two Items of the same kind via Button"
+  it "Expect to have one article of quantity 2 after clicking add button twice"
 
-  it "Add Button with quantity > 1" 
+  it "Expect to have one article with quantity x after clicking add button with quantity x" 
 
-  it "Add Item with Quantity = 0"
+  it "Expect not to increase number of article in cart when adding article with quantity 0"
 
-  it "Update Quantity of a given Item"
+  it "Expect to equal the new quantity after updating quantity"
 
-  it "Update Quantity of an item to 0"
+  it "Expect not to update quantity when updating quantity to 0"
 
-  it "Delete an item"
+  it "Expect to decrease cart count after delete article"
 
 
   end

@@ -49,7 +49,9 @@ capybara-*.html
 /log
 /tmp
 /db/*.sqlite3
-/public/system
+public/system
+public
+public/uploads
 /coverage/
 /spec/tmp
 **.orig
