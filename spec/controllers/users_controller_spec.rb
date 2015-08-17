@@ -41,6 +41,11 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET #edit" do
+
+    before(:each) do
+      sign_in(create(:user, admin: true))
+    end
+
     it "renders the :edit template" do
       get :edit, id: create(:user)
       expect(response).to render_template(:edit)
@@ -61,15 +66,34 @@ RSpec.describe UsersController, type: :controller do
 
   describe "Normal User or no user redirect" do
   
-    it "user redirect trying to get all users" do
-      sign_in(create(:user))
-      get :index
-      expect(response).to redirect_to(new_user_session_path)
+    context "User" do
+      
+      before(:each) do 
+        sign_in(create(:user))
+      end
+
+      it "user redirect trying to get all users" do
+        get :index
+        expect(response).to redirect_to(new_user_session_path)
+      end
+
+      it "user redirect trying to edit user" do
+	get :edit, id: create(:user)
+	expect(response).to redirect_to(new_user_session_path)
+      end
     end
 
-    it "no user redirect trying to get all users" do
-      get :index
-      expect(response).to redirect_to(new_user_registration_path)
+    context "No user" do
+
+      it "no user redirect trying to get all users" do
+        get :index
+        expect(response).to redirect_to(new_user_registration_path)
+      end
+
+      it "no user redirect trying to edit user" do
+	get :edit, id: create(:user)
+	expect(response).to redirect_to(new_user_registration_path)
+      end
     end
   end
 end
