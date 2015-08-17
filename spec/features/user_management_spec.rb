@@ -91,12 +91,14 @@ feature "the login process" do
         click_on 'Profil bearbeiten'
         expect(page).to have_button('Ja, Account löschen')
       end
-  
-      scenario "expect Alle-Nutzer to link to the right path" do
-        log_in_as(user)
-        click_on 'Alle Nutzer'
-        expect(current_path).to eq(users_path)
-      end
+      
+      # Should not be appear for normal user 
+      # scenario "expect Alle-Nutzer to link to the right path" do
+      #  log_in_as(user)
+      #  click_on 'Alle Nutzer'
+      #  expect(current_path).to eq(users_path)
+      # end
+
       scenario "expect User not to have a button to add an article" do
         log_in_as(user)
         click_on 'Bestellen'

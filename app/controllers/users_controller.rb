@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :admin_user, only: [:index, :edit]
+  before_action :admin_user, only: [:index]
+  before_action :correct_user, only: [:edit]
 
   def index
     @users = User.paginate(:page => params[:page], :per_page => 10)
@@ -37,9 +38,18 @@ class UsersController < ApplicationController
     def admin_user
       if current_user
         @user = current_user
-        redirect_to(new_user_session_path) unless @user[:admin] == true
+        redirect_to(new_user_session_path) unless (@user[:admin] == true)
       else
 	redirect_to(new_user_registration_path)
+      end
+    end
+
+    def correct_user
+      if current_user
+        @user = User.find(params[:id])
+	redirect_to(new_user_session_path) unless (current_user[:admin] == true || @user == current_user)
+      else
+        redirect_to(new_user_registration_path)
       end
     end
 end

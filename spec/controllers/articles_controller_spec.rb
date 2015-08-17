@@ -152,5 +152,5 @@ RSpec.describe ArticlesController, type: :controller do
         get :new
 	expect(response).to redirect_to(articles_path)
       end
-
+  end
 end
