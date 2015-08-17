@@ -1,8 +1,13 @@
 <%= nav_bar fixed: :top, responsive: true do %>
   <%= menu_group do %>
-    <%= menu_item "Foodle", root_path %>
-    <%= menu_item "Bestellen", articles_path %>
-    <%= menu_item "Alle Nutzer", users_path %>
+    <% if current_user.try(:admin?) %>
+      <%= menu_item "Stammdaten", articles_path %>
+      <%= menu_item "Benutzer", users_path %>
+      <%= menu_item "Bestellungen", '#' %>
+    <% else %>
+      <%= menu_item "Foodle", root_path %>
+      <%= menu_item "Bestellen", articles_path %>
+    <% end %>
   <% end %>
 
   <%= menu_group :pull => :right do %>

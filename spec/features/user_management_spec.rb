@@ -34,7 +34,7 @@ feature "the login process" do
   
       scenario "expect Admin to have a button to add an article" do
         log_in_as(admin)
-        click_on 'Bestellen'
+        click_on 'Stammdaten'
         expect(page).to have_link('', :href => new_article_path)
       end
   
@@ -122,14 +122,14 @@ feature "the login process" do
         # find a way to get the user creation out of each scenario
         user = FactoryGirl.create(:user)
         log_in_as(admin)
-        click_on 'Alle Nutzer'
+        click_on 'Benutzer'
         expect(page).to have_link('', :href => edit_user_path(user))
       end
   
       scenario "expect Admin to have delete-button in Alle Nutzer" do
       user = FactoryGirl.create(:user)
         log_in_as(admin)
-        click_on 'Alle Nutzer'
+        click_on 'Benutzer'
         expect(page).to have_link('', :href => user_path(user), :count => 2)
       end
   end
@@ -138,20 +138,13 @@ feature "the login process" do
     let (:user){FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })}
     subject{user}
 
-      scenario "expect User not to have edit-button in Alle Nutzer" do
+      scenario "expect User not to have a Benutzer Button" do
         # find a way to get the user creation out of each scenario
-      user2 = FactoryGirl.create(:user)
+        user2 = FactoryGirl.create(:user)
         log_in_as(user)
-        click_on 'Alle Nutzer'
-        expect(page).not_to have_link('', :href => edit_user_path(user2))
+        expect(page).not_to have_link('', :href => users_path)
       end
      
-      scenario "expect User not to have delete-button in Aller Nutzer" do
-      user2 = FactoryGirl.create(:user)
-        log_in_as(user)
-        click_on 'Alle Nutzer'
-        expect(page).not_to have_link('', :href => user_path(user2), :count => 2)
-      end
   end
 
   scenario "expect Bestellen Button in Navbar links to correct path" do
