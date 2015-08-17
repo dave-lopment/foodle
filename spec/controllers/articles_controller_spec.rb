@@ -64,6 +64,10 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "GET #edit" do
+    before(:each) do
+      sign_in(create(:user, admin:true))
+    end
+
     it "renders the :edit template" do
       get :edit, id: create(:article)
       expect(response).to render_template(:edit)
@@ -77,7 +81,9 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+
     it "deletes an article" do
+      sign_in(create(:user, admin:true))
       article = create(:article)
       expect {
         delete :destroy, :id => article.id
@@ -108,6 +114,7 @@ RSpec.describe ArticlesController, type: :controller do
     end
 
     before(:each) do
+      sign_in(create(:user, admin:true))
       @article = create(:article)
       put :update, :id => @article.id, :article => attr
       @article.reload
@@ -131,4 +138,16 @@ RSpec.describe ArticlesController, type: :controller do
     end
   end
 
+  describe "GET normal User" do
+
+   before(:each) do
+    @article = create(:article)
+    @user = create(:user, {email: "peter@lustig.de", password: "12345678"})
+   end
+   
+    it "redirects user trying to edit articles" do
+      get :edit, id: create(:article)
+      expect(response).to redirect_to(articles_path)
+    end
+  end
 end

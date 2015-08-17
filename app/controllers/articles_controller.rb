@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :admin_user, only: [:edit, :update, :destroy]
+
   def new
     @article = Article.new
   end
@@ -58,5 +60,14 @@ class ArticlesController < ApplicationController
 
     def article_params
       params.require(:article).permit(:name, :description, :price, :isVegetarian, :category_id, :img_name)
+    end
+
+    def admin_user
+      if current_user
+        @user = current_user
+        redirect_to(articles_path) unless @user[:admin] == true
+      else
+	redirect_to(articles_path)
+      end
     end
 end
