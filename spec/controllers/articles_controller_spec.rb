@@ -29,6 +29,9 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "GET #new" do
+    before(:each) do
+    sign_in(create(:user, admin: true))
+    end
     it "assigns a new Article to @article" do
       get :new
       expect(assigns(:article)).to be_a(Article)
@@ -138,16 +141,20 @@ RSpec.describe ArticlesController, type: :controller do
     end
   end
 
-  describe "GET normal User" do
+  describe "redirect normal User or no user" do
+ 
+   context "get " do
+     
+      it "redirects user trying to get edit articles" do
+        get :edit, id: create(:article)
+        expect(response).to redirect_to(articles_path)
+      end
 
-   before(:each) do
-    @article = create(:article)
-    @user = create(:user, {email: "peter@lustig.de", password: "12345678"})
+      it "redirects user trying to get create articles" do
+        get :new
+	expect(response).to redirect_to(articles_path)
+      end
+
    end
-   
-    it "redirects user trying to edit articles" do
-      get :edit, id: create(:article)
-      expect(response).to redirect_to(articles_path)
-    end
   end
 end
