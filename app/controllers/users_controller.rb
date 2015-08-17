@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :admin_user, only: [:index]
+
   def index
     @users = User.paginate(:page => params[:page], :per_page => 10)
   end
@@ -30,5 +32,14 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :postal, :city, :street, :password, :password_confirmation)
+    end
+
+    def admin_user
+      if current_user
+        @user = current_user
+        redirect_to(new_user_session_path) unless @user[:admin] == true
+      else
+	redirect_to(new_user_registration_path)
+      end
     end
 end

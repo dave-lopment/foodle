@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   describe "GET #index" do
+
+    before(:each) do
+      sign_in(create(:user, admin: true))
+    end
+
     it "returns http success" do
       get :index
       expect(response).to have_http_status(:success)
@@ -51,6 +56,20 @@ RSpec.describe UsersController, type: :controller do
   describe "PATCH #update" do
     context "with valid parameters" do
       it "updates the user"
+    end
+  end
+
+  describe "Normal User or no user redirect" do
+  
+    it "user redirect trying to get all users" do
+      sign_in(create(:user))
+      get :index
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it "no user redirect trying to get all users" do
+      get :index
+      expect(response).to redirect_to(new_user_registration_path)
     end
   end
 end

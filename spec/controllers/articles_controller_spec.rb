@@ -142,8 +142,6 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "redirect normal User or no user" do
- 
-   context "get " do
      
       it "redirects user trying to get edit articles" do
         get :edit, id: create(:article)
@@ -155,6 +153,4 @@ RSpec.describe ArticlesController, type: :controller do
 	expect(response).to redirect_to(articles_path)
       end
 
-   end
-  end
 end
