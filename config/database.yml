@@ -9,10 +9,8 @@ default: &default
   enconding: utf8
   pool: 5
   timeout: 5000
-  username: uOy8MKUeoBwrE
-  password: pWcINyIveFmOs
-  host: 10.12.0.6
-  port: 3307
+  username: root
+  password: 
 
 development:
   <<: *default
