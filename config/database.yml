@@ -6,8 +6,11 @@
 #
 default: &default
   adapter: mysql2
+  enconding: utf8
   pool: 5
   timeout: 5000
+  username: root
+  password: 
 
 development:
   <<: *default
