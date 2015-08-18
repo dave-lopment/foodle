@@ -8,5 +8,5 @@ applications:
   services:
   - foodle_mysql
   env:
-    STACK: cedar 
-    RAILS_ENV: development
+    STACK: cedar
+    RAILS_ENV: production
