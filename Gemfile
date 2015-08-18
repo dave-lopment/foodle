@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -38,6 +38,9 @@ gem 'sass-rails', '~> 5.0.1'
 gem 'compass-rails', '~> 2.0.4'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 
+gem 'carrierwave'
+gem 'mini_magick',             '3.8.0'
+gem 'fog',                     '1.33.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -62,8 +65,4 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara', '2.4.4'
   gem 'warden-rspec-rails', '0.1.0'
-
-  gem 'carrierwave',             '0.10.0'
-  gem 'mini_magick',             '3.8.0'
-  gem 'fog',                     '1.33.0'
 end

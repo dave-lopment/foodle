@@ -1,0 +1,9 @@
+---
+applications:
+- name: foodle
+  memory: 256M
+  host: foodle
+  services:
+  - foodle_mysql
+  env:
+    RAILS_ENV: production
