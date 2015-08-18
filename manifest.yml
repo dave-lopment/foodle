@@ -2,7 +2,9 @@
 applications:
 - name: foodle
   memory: 256M
-  host: foodle
+  buildpack: 'https://github.com/cloudfoundry/ruby-buildpack.git#v1.4.2'
+  domain: de.a9sapp.eu
+  path: .
   services:
   - foodle_mysql
   env:
