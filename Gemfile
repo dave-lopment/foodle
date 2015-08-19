@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+ruby '2.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
- gem 'sqlite3'
  gem 'mysql2'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -42,7 +41,7 @@ gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'carrierwave'
 gem 'mini_magick',             '3.8.0'
 gem 'fog',                     '1.33.0'
-gem 'rails_12factor' 
+gem 'rails_12factor'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
