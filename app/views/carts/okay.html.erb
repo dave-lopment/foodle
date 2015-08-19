@@ -17,6 +17,14 @@
   </div>
 
   <h2>Bezahl-Methode</h2>
+  <div class="form-group col-md-10">
+    <%= radio_button_tag :payment, "cash", true %>
+    <%= label_tag :payment_cash, "Bar bei Lierferung" %>
+    <br/>
+    <%= radio_button_tag :payment, "credit" %>
+    <%= label_tag :payment_credit, "Kreditkarte" %>
+  </div>
+
 <% end %>
 
 <%= link_to okay_okay_path, :class => "btn btn-success cart-btn pull-right" do %>
