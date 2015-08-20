@@ -43,12 +43,12 @@ if (User.find_by(name: "Peter Lustig") == nil)
 end
 
 
-if (User.find_by(name: "Peter Unlustig") == nil)
+if (User.find_by(email: "peter@unlustig.de") == nil)
   User.create!( name: "Peter Unlustig",
                 email: "peter@unlustig.de",
                 password: "12345678",
-                street: "Der Admin-Garten",
-                city: "Stadtmin",
+                street: "Der Normale-User-Garten",
+                city: "Stadt",
                 postal: "11111",
                 admin: false)
 end
@@ -152,9 +152,9 @@ end
 
 unless OrderStatus.all.count > 0
   OrderStatus.create! id: 1, name: "In Erstellung"
-  OrderStatus.create! id: 2, name: "Abgeschickt"
-  OrderStatus.create! id: 3, name: "In Bearbeitung"
-  OrderStatus.create! id: 4, name: "Abgeschickt"
+  OrderStatus.create! id: 2, name: "Auftrag"
+  OrderStatus.create! id: 3, name: "Abgeschickt"
+  OrderStatus.create! id: 4, name: "Angekommen"
   OrderStatus.create! id: 5, name: "Storniert"
 end
 

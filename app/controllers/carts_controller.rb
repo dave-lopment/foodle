@@ -10,6 +10,9 @@ class CartsController < ApplicationController
 
   def confirm_order_details
     @order = current_order
+    @order.street = params[:street]
+    @order.postal = params[:postal]
+    @order.city = params[:city]
     @order.order_status_id = 2;
     @order.save!
     @pay = params[:payment]
@@ -18,7 +21,7 @@ class CartsController < ApplicationController
   def cancel_order
     @order = current_order
     if @order.try(:order_status_id)
-      if @order.order_status_id > 1;
+      if (@order.order_status_id > 1 )
         @order.order_status_id = 1;
         @order.save
         redirect_to :back

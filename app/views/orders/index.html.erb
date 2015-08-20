@@ -1,0 +1,18 @@
+<ul>
+    <% @orders.each do |order| %>
+      <li>
+        <p> <%= order.order_status_id %> </p>
+        <p> <%= order.street %> </p>
+        <p> <%= order.postal %> </p>
+        <p> <%= order.city %> </p>
+        <p> <%= order.id %> </p>
+
+        <%= link_to "Liefern", deliver_order_path(:order_id => order.id) %>
+
+        <%= link_to order, method: :delete,
+          data: { confirm: "Bestellung löschen?" }, :class => "btn btn-danger cart-btn" do %>
+          <i class="glyphicon glyphicon-remove"></i>
+        <% end %>
+      </li>
+    <% end %>
+</ul>

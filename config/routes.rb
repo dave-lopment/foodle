@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update, :destroy]
   resources :articles
   resource :cart, only: [:show]
+  resources :orders
+  get 'deliver_order', to: 'orders#deliver_order'
   resources :order_items, only: [:create, :update, :destroy]
 
   # routes for acts_as_votable

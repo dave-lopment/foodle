@@ -3,7 +3,7 @@
     <% if current_user.try(:admin?) %>
       <%= menu_item "Stammdaten", articles_path %>
       <%= menu_item "Benutzer", users_path %>
-      <%= menu_item "Bestellungen", '#' %>
+      <%= menu_item "Bestellungen", orders_path %>
     <% else %>
       <%= menu_item "Foodle", root_path %>
       <%= menu_item "Bestellen", articles_path %>
