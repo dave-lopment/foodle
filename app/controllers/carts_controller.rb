@@ -17,11 +17,12 @@ class CartsController < ApplicationController
 
   def cancel_order
     @order = current_order
-    if @order.order_status_id == 2;
-      @order.order_status_id = 1;
-      @order.save
-      redirect_to :back
+    if @order.try(:order_status_id)
+      if @order.order_status_id > 1;
+        @order.order_status_id = 1;
+        @order.save
+        redirect_to :back
+      end
     end
-
   end
 end
