@@ -18,8 +18,6 @@
 <% end %>
 <div>
 
-  <%= "#{current_order.order_status_id}" %>
-
   <% if current_order.order_status_id == 1 %>
 
     <%= link_to confirm_order_path, :class => "btn btn-success cart-btn pull-right" do %>
