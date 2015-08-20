@@ -26,7 +26,8 @@
 
     <% elsif current_order.order_status_id > 1  %>
 
-      <%= link_to cancel_order_path, :class => "btn btn-danger cart-btn pull-right" do %>
+      <%= link_to cancel_order_path, data: { confirm: "Bestellung stornieren?" },
+        :class => "btn btn-danger cart-btn pull-right" do %>
         <i class="glyphicon glyphicon-ok"> Stornieren</i>
       <% end %>
     <% end %>
