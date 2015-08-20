@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   get 'okay', to: 'carts#okay'
-  get 'okay_okay', to: 'carts#okay_okay'
+  post 'okay_okay', to: 'carts#okay_okay'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

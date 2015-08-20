@@ -10,5 +10,7 @@ class CartsController < ApplicationController
   def okay_okay
     @order = current_order
     @order.order_status_id = 2;
+    @pay = params[:payment]
+
   end
 end

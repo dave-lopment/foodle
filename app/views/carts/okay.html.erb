@@ -1,6 +1,6 @@
 <h1>Bestellung bestätigen</h1>
 <h2>Liefer-Adresse</h2>
-<%= form_tag do %>
+<%= form_tag okay_okay_path do %>
   <div class="form-group col-md-12">
     <%= label_tag 'Straße & Hausnummer' %>
     <%= text_field_tag(@street, (current_user.street if current_user), class: "form-control") %>
@@ -25,8 +25,9 @@
     <%= label_tag :payment_credit, "Kreditkarte" %>
   </div>
 
-<% end %>
+  <%= button_tag(type: "submit", class: "btn btn-success") do %>
+    <i class="glyphicon glyphicon-ok"> Bestellen</i>
+  <% end %>
 
-<%= link_to okay_okay_path, :class => "btn btn-success cart-btn pull-right" do %>
-  <i class="glyphicon glyphicon-ok"> Bestellen</i>
+
 <% end %>
