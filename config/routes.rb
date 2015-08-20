@@ -21,8 +21,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'okay', to: 'carts#okay'
-  post 'okay_okay', to: 'carts#okay_okay'
+  get 'confirm_order', to: 'carts#confirm_order'
+  post 'confirm_order_details', to: 'carts#confirm_order_details'
+  get 'cancel_order',  to: 'carts#cancel_order'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

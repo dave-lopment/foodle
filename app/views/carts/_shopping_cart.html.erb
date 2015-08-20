@@ -17,7 +17,19 @@
   <% end %>
 <% end %>
 <div>
-  <%= link_to okay_path, :class => "btn btn-success cart-btn pull-right" do %>
-    <i class="glyphicon glyphicon-ok"> Bestellen</i>
+
+  <%= "#{current_order.order_status_id}" %>
+
+  <% if current_order.order_status_id == 1 %>
+
+    <%= link_to confirm_order_path, :class => "btn btn-success cart-btn pull-right" do %>
+      <i class="glyphicon glyphicon-ok"> Bestellen</i>
+    <% end %>
+
+  <% else %>
+
+    <%= link_to cancel_order_path, :class => "btn btn-danger cart-btn pull-right" do %>
+      <i class="glyphicon glyphicon-ok"> Stornieren</i>
+    <% end %>
   <% end %>
 </div>
