@@ -1,18 +1,22 @@
+<div class="col-md-8 col-md-offset-2">
 <ul>
     <% @orders.each do |order| %>
-      <li>
-        <p> <%= order.order_status_id %> </p>
-        <p> <%= order.street %> </p>
-        <p> <%= order.postal %> </p>
-        <p> <%= order.city %> </p>
-        <p> <%= order.id %> </p>
+      <li class="orders">
+        <div class="col-md-9">
+          Status: <%= order.order_status_id %>
+          <p> <%= order.street %> </p>
+          <p> <%= order.postal %> <%= order.city %> </p>
+        </div>
+        <div class="col-md-3">
 
-        <%= link_to "Liefern", deliver_order_path(:order_id => order.id) %>
+          <%= link_to order, method: :delete,
+            data: { confirm: "Bestellung löschen?" }, :class => "btn btn-danger cart-btn" do %>
+            <i class="glyphicon glyphicon-remove"></i>
+          <% end %>
 
-        <%= link_to order, method: :delete,
-          data: { confirm: "Bestellung löschen?" }, :class => "btn btn-danger cart-btn" do %>
-          <i class="glyphicon glyphicon-remove"></i>
-        <% end %>
+          <%= link_to "Liefern", deliver_order_path(:order_id => order.id), :class => "btn btn-primary cart-btn" %>
+        </div>
       </li>
     <% end %>
 </ul>
+</div>

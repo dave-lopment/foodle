@@ -36,7 +36,7 @@ if (User.find_by(name: "Peter Lustig") == nil)
   User.create!( name: "Peter Lustig",
                 email: "peter@lustig.de",
                 password: "12345678",
-                street: "Der Admin-Garten",
+                street: "Der Admin-Garten 1",
                 city: "Stadtmin",
                 postal: "11111",
                 admin: true)
@@ -47,7 +47,7 @@ if (User.find_by(email: "peter@unlustig.de") == nil)
   User.create!( name: "Peter Unlustig",
                 email: "peter@unlustig.de",
                 password: "12345678",
-                street: "Der Normale-User-Garten",
+                street: "Der Normale-User-Garten 99",
                 city: "Stadt",
                 postal: "11111",
                 admin: false)
