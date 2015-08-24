@@ -87,12 +87,12 @@ RSpec.describe UsersController, type: :controller do
 
       it "no user redirect trying to get all users" do
         get :index
-        expect(response).to redirect_to(new_user_registration_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
 
       it "no user redirect trying to edit user" do
 	get :edit, id: create(:user)
-	expect(response).to redirect_to(new_user_registration_path)
+	expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

@@ -40,7 +40,7 @@ class UsersController < ApplicationController
         @user = current_user
         redirect_to(new_user_session_path) unless (@user[:admin] == true)
       else
-	redirect_to(new_user_registration_path)
+	redirect_to(new_user_session_path)
       end
     end
 
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
 	redirect_to(new_user_session_path) unless (current_user[:admin] == true || @user == current_user)
       else
-        redirect_to(new_user_registration_path)
+        redirect_to(new_user_session_path)
       end
     end
 end
