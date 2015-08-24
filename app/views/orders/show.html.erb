@@ -1,11 +1,16 @@
 <div class="col-md-8 cold-md-offset-2">
-  <ul>
-    <% @order.order_items do |order_item| %>
-
-	<%= order_item.quantity %>
-	<%= order_item.name %>
-	<%= order_item.subtotal %>
-
+  <table class="table">
+    <tr>
+      <td>#</td><td>Quantity</td><td>Name</td><td>Total Price</td>
+    </tr>
+    <% @order.order_items.each do |order_item| %>
+    <tr>
+	<td> # </td>
+	<td><%= order_item.quantity %></td>
+	<td><%= order_item.article.name %></td>
+	<td><%= order_item.total_price %> €</td>
+    </tr>
     <% end %>
-  </ul>
+  </table>
+  <%= link_to "Zurück", :back, class: "btn btn-default" %>
 </div>
