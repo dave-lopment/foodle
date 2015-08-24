@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   
   def index
     @orders = Order.all
+    @status = OrderStatus.all
   end
 
   def destroy
