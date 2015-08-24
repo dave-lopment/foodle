@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :admin_user, only: [:edit, :new]
+  
   def index
     @orders = Order.all
   end
@@ -18,4 +20,15 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
   end
+
+  private
+
+    def admin_user
+      if current_user
+        @user = current_user
+        redirect_to(articles_path) unless @user[:admin] == true
+      else
+	redirect_to(articles_path)
+      end
+    end
 end
