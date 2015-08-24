@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :admin_user, only: [:edit, :new]
+  before_action :admin_user, only: [:index]
   
   def index
     @orders = Order.all
