@@ -2,7 +2,10 @@
 <ul>
     <% @orders.each do |order| %>
       <li class="orders">
-        <div class="col-md-9">
+	<div class="col-md-1">
+		<p> <%= link_to order.id, order_path(order.id) %>  </p>
+	</div>
+        <div class="col-md-8">
           Status: <%= order.order_status_id %>
           <p> <%= order.street %> </p>
           <p> <%= order.postal %> <%= order.city %> </p>

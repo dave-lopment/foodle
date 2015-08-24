@@ -1,0 +1,11 @@
+<div class="col-md-8 cold-md-offset-2">
+  <ul>
+    <% @order.order_items do |order_item| %>
+
+	<%= order_item.quantity %>
+	<%= order_item.name %>
+	<%= order_item.subtotal %>
+
+    <% end %>
+  </ul>
+</div>
