@@ -5,8 +5,6 @@ applications:
   buildpack: 'https://github.com/cloudfoundry/ruby-buildpack.git#v1.4.2'
   domain: de.a9sapp.eu
   path: .
-  services:
-  - foodle_mysql
   env:
     STACK: cedar
     RAILS_ENV: production
