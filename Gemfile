@@ -66,3 +66,7 @@ group :development, :test do
   gem 'capybara', '2.4.4'
   gem 'warden-rspec-rails', '0.1.0'
 end
+
+group :production do
+  gem 'a9s_swift'
+end 
