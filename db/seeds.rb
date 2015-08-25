@@ -151,11 +151,11 @@ if (Category.find_by(name: "Dessert") == nil)
 end
 
 unless OrderStatus.all.count > 0
-  OrderStatus.create! id: 1, name: "In Erstellung"
-  OrderStatus.create! id: 2, name: "Auftrag"
-  OrderStatus.create! id: 3, name: "Abgeschickt"
-  OrderStatus.create! id: 4, name: "Angekommen"
-  OrderStatus.create! id: 5, name: "Storniert"
+  OrderStatus.create! name: "In Erstellung"
+  OrderStatus.create! name: "Auftrag"
+  OrderStatus.create! name: "Abgeschickt"
+  OrderStatus.create! name: "Angekommen"
+  OrderStatus.create! name: "Storniert"
 end
 
 # 30.times do |n|
