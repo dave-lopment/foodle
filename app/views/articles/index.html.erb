@@ -22,7 +22,7 @@
     <li>
 
       <div class = "col-md-2" >
-        <%= image_tag(article.img_name, class: "food-img") if article.img_name? %>
+        <%= image_tag(article.img_name, class: "food-img", :size => "140x140") if article.img_name? %>
       </div>
       <div class = "col-md-5">
         <p><%=link_to article.name, article %></p>

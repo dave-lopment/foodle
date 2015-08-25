@@ -39,7 +39,6 @@ gem 'compass-rails', '~> 2.0.4'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 
 gem 'carrierwave'
-gem 'mini_magick',             '3.8.0'
 gem 'fog',                     '1.33.0'
 gem 'rails_12factor'
 
