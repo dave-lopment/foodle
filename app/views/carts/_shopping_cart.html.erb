@@ -33,3 +33,4 @@
     <% end %>
   <% end %>
 </div>
+          Status: <%= OrderStatus.all.find( current_order.order_status_id ).name %>
