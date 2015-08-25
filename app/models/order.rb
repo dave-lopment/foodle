@@ -6,11 +6,6 @@ class Order < ActiveRecord::Base
   before_save :update_subtotal
 
 
-  validates :postal, length: { is: 5 }
-  validates :city, presence: true, allow_blank: false
-  validates :street, presence: true, allow_blank: false
-
-
   def subtotal
     order_items.collect { |oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0}.sum
   end
