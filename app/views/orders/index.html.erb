@@ -1,13 +1,10 @@
 <div class="col-md-8 col-md-offset-2">
   <table class="table table-striped">
     <tr>
-      <td>ID</td><td>Info</td><td>Aktionen</td>
+      <td>Info</td><td>Aktionen</td>
     </tr>
     <% @orders.each do |order| %>
     <tr>
-      <td>
-        <%= link_to order.id, order_path(order.id) %>
-      </td>
       <td>
         Status: <%= @status.find( order.order_status_id ).name %> <br/>
         An: <%= order.street %> <br/>
@@ -18,7 +15,10 @@
               data: { confirm: "Bestellung löschen?" }, :class => "btn btn-danger cart-btn" do %>
               <i class="glyphicon glyphicon-remove"></i>
         <% end %>
-        <%= link_to "Liefern", deliver_order_path(:order_id => order.id), :class => "btn btn-primary cart-btn" %>
+        <%= link_to "Details", order_path(order.id), :class => "btn btn-primary cart-btn" %>
+        <%= link_to "Liefern", deliver_order_path(:order_id => order.id), :class => "btn btn-success cart-btn" %>
+        
+      
       </td>
       </tr>
     <% end %> 
