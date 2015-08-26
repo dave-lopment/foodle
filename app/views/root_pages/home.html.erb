@@ -11,16 +11,17 @@
           <p><%=article.description.truncate_words(22) %></p>
           <p> 
             <% @likes = article.get_likes.size %>
-
-            <% if @likes < 0 %>
-              Dieses Essen schmeckt nicht.
-            <% elsif @likes == 0 %> 
-              Diese Speise wurde noch nicht bewertet.
-            <% elsif @likes > 1 %> 
-              <%= @likes %> Nutzer finden diese Speise lecker.
-            <% else %> 
-              <%= @likes %> Nutzer findet diese Speise lecker.
-            <% end %> 
+            <small>
+              <% if @likes < 0 %>
+                Dieses Essen schmeckt nicht.
+              <% elsif @likes == 0 %> 
+                Diese Speise wurde noch nicht bewertet.
+              <% elsif @likes > 1 %> 
+                <%= @likes %> Nutzer finden diese Speise lecker.
+              <% else %> 
+                <%= @likes %> Nutzer findet diese Speise lecker.
+              <% end %> 
+            </small>
           </p> 
         </div>
 

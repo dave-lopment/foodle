@@ -23,18 +23,19 @@
 
       </div>
       <% end %>
-      
-      <% @likes = @article.get_likes.size %>
+      <small>
+        <% @likes = @article.get_likes.size %>
 
-      <% if @likes < 0 %>
-        Dieses Essen schmeckt nicht.
-      <% elsif @likes == 0 %> 
-        Dieses Essen hat noch niemand bewertet, sei der Erste! 
-      <% elsif @likes > 1 %> 
-        <%= @likes %> Nutzer finden diese Speise lecker.
-      <% else %> 
-        <%= @likes %> Nutzer findet diese Speise lecker.
-      <% end %> 
+        <% if @likes < 0 %>
+          Dieses Essen schmeckt nicht.
+        <% elsif @likes == 0 %> 
+          Dieses Essen hat noch niemand bewertet, sei der Erste! 
+        <% elsif @likes > 1 %> 
+          <%= @likes %> Nutzer finden diese Speise lecker.
+        <% else %> 
+          <%= @likes %> Nutzer findet diese Speise lecker.
+        <% end %> 
+      </small>
     </div>
 
     <div class="col-md-2">
