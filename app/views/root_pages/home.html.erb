@@ -5,9 +5,10 @@
       <li class="well">
 
         <div class="col-md-12">
+          <%= image_tag(article.img_name, class: "food-img", :size => "140x140") if article.img_name? %>
           <p><%=link_to article.name, article %></p>
           <p class="small"><%= article.category.name %></p>
-          <p> <%= article.get_likes.size %>
+          <p> <%= article.get_likes.size %> 
           <p><%=article.description.truncate_words(22) %></p>
         </div>
 
