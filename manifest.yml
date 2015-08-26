@@ -8,5 +8,5 @@ applications:
   env:
     STACK: cedar
     RAILS_ENV: production
-	EMAIL_USERNAME: videoapp@adherry.de
+    EMAIL_USERNAME: videoapp@adherry.de
     EMAIL_PASSWORD: '&crerhS8Hhmx'
