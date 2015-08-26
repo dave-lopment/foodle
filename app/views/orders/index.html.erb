@@ -4,23 +4,25 @@
       <td>Info</td><td>Aktionen</td>
     </tr>
     <% @orders.each do |order| %>
-    <tr>
-      <td>
-        Status: <%= order.order_status %> <br/>
-        An: <%= order.street %> <br/>
-        <%= order.postal %> <%= order.city %> 
-      </td>
-      <td>
-        <%= link_to order , method: :delete,
-              data: { confirm: "Bestellung löschen?" }, :class => "btn btn-danger cart-btn" do %>
-              <i class="glyphicon glyphicon-remove"></i>
-        <% end %>
-        <%= link_to "Details", order_path(order.id), :class => "btn btn-primary cart-btn" %>
-        <%= link_to "Liefern", deliver_order_path(:order_id => order.id), :class => "btn btn-success cart-btn" %>
-        
-      
-      </td>
-      </tr>
+      <% if !(order.Erstellung?) %>
+        <tr>
+          <td>
+            Status: <%= order.order_status %> <br/>
+            An: <%= order.street %> <br/>
+            <%= order.postal %> <%= order.city %> 
+          </td>
+          <td>
+            <%= link_to order , method: :delete,
+                  data: { confirm: "Bestellung löschen?" }, :class => "btn btn-danger cart-btn" do %>
+                  <i class="glyphicon glyphicon-remove"></i>
+            <% end %>
+            <%= link_to "Details", order_path(order.id), :class => "btn btn-primary cart-btn" %>
+            <%= link_to "Liefern", deliver_order_path(:order_id => order.id), :class => "btn btn-success cart-btn" %>
+            
+          
+          </td>
+        </tr>
+      <% end %>  
     <% end %> 
 
   </table>
