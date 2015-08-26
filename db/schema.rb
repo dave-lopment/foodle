@@ -46,27 +46,18 @@ ActiveRecord::Schema.define(version: 20150826050920) do
   add_index "order_items", ["article_id"], name: "index_order_items_on_article_id", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
-  create_table "order_statuses", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "orders", force: :cascade do |t|
-    t.decimal  "subtotal",        precision: 12, scale: 3
-    t.decimal  "tax",             precision: 12, scale: 3
-    t.decimal  "shipping",        precision: 12, scale: 3
-    t.decimal  "total",           precision: 12, scale: 3
-    t.integer  "order_status_id"
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.decimal  "subtotal",     precision: 12, scale: 3
+    t.decimal  "tax",          precision: 12, scale: 3
+    t.decimal  "shipping",     precision: 12, scale: 3
+    t.decimal  "total",        precision: 12, scale: 3
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.string   "street"
     t.string   "city"
     t.integer  "postal"
-    t.integer  "order_status",                             default: 0
+    t.integer  "order_status",                          default: 0
   end
-
-  add_index "orders", ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -108,5 +99,4 @@ ActiveRecord::Schema.define(version: 20150826050920) do
 
   add_foreign_key "order_items", "articles"
   add_foreign_key "order_items", "orders"
-  add_foreign_key "orders", "order_statuses"
 end

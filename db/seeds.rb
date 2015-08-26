@@ -10,7 +10,6 @@ require 'ffaker'
 # Article.delete_all
 # User.delete_all
 # Category.delete_all
-# OrderStatus.delete_all
 
 if User.all.count == 0
   40.times do |n|
@@ -148,14 +147,6 @@ if (Category.find_by(name: "Dessert") == nil)
                       price: price,
                       isVegetarian: false)
     end unless(@category.articles.count > 0)
-end
-
-unless OrderStatus.all.count > 0
-  OrderStatus.create! name: "In Erstellung"
-  OrderStatus.create! name: "Auftrag"
-  OrderStatus.create! name: "Abgeschickt"
-  OrderStatus.create! name: "Angekommen"
-  OrderStatus.create! name: "Storniert"
 end
 
 # 30.times do |n|
