@@ -65,6 +65,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'capybara', '2.4.4'
   gem 'warden-rspec-rails', '0.1.0'
+
+  gem 'letter_opener' 
 end
 
 group :production do

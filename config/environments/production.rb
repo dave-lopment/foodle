@@ -87,5 +87,5 @@ Rails.application.configure do
    :authentication       => "plain",
   :enable_starttls_auto => true
   }
-  config.action_mailer.default_url_options = { :host => 'videoapp.de.a9sapp.eu' }
+  config.action_mailer.default_url_options = { :host => 'foodle.de.a9sapp.eu' }
 end
