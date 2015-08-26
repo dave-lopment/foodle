@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+ 
+    root 'root_pages#home'
 
-
-  root 'root_pages#home'
   devise_for :users
 
   # try this if routing bugs happen

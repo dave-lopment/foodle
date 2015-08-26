@@ -26,6 +26,8 @@
       <%= f.label :isVegetarian, " vegetarisch" %>
     </div>
 
+    <%= f.file_field :img_name, accept: 'image/jpeg,image/gif,image/png' %>
+
     <%= f.submit "Speichern", class: "btn btn-primary pull-right" %>
 
   <% end %>

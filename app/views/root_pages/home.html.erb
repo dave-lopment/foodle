@@ -5,29 +5,47 @@
       <li class="well">
 
         <div class="col-md-12">
+          <%= image_tag(article.img_name, class: "food-img", :size => "140x140") if article.img_name? %>
           <p><%=link_to article.name, article %></p>
           <p class="small"><%= article.category.name %></p>
-          <p> <%= article.get_likes.size %>
           <p><%=article.description.truncate_words(22) %></p>
+          <p> 
+            <% @likes = article.get_likes.size %>
+            <small>
+              <% if @likes < 0 %>
+                Dieses Essen schmeckt nicht.
+              <% elsif @likes == 0 %> 
+                Diese Speise wurde noch nicht bewertet.
+              <% elsif @likes > 1 %> 
+                <%= @likes %> Nutzer finden diese Speise lecker.
+              <% else %> 
+                <%= @likes %> Nutzer findet diese Speise lecker.
+              <% end %> 
+            </small>
+          </p> 
         </div>
 
         <div class = "col-md-6 col-md-offset-6">
-          <%= form_for @order_item, remote: true do |f| %>
-          
-            <div class = "col-md-4 col-md-offset-3">
-              <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
-            </div>
 
-            <div class = "col-md-5">
-              <div class = "pull-right">
-              <%= f.hidden_field :article_id, value: article.id %>
-              <%= article.price %> €
-              <%= button_tag(type: 'submit', class: "btn btn-primary cart-btn") do %>
-                <i class="glyphicon glyphicon-shopping-cart"></i>
-              <% end %>
+          <% if !current_user.try(:admin?) %> 
+
+            <%= form_for @order_item, remote: true do |f| %>
+            
+              <div class = "col-md-4 col-md-offset-3">
+                <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
               </div>
-            </div>
 
+              <div class = "col-md-5">
+                <div class = "pull-right">
+                <%= f.hidden_field :article_id, value: article.id %>
+                <%= article.price %> €
+                <%= button_tag(type: 'submit', class: "btn btn-primary cart-btn") do %>
+                  <i class="glyphicon glyphicon-shopping-cart"></i>
+                <% end %>
+                </div>
+              </div>
+
+            <% end %>
           <% end %>
         </div>
       </li>

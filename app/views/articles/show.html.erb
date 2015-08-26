@@ -1,53 +1,84 @@
-<div class="col-md-8">
+<div class="container">
 
-  <h1> <%= @article.name %> <br/><small><%= @article.category.name%></small></h1>
-  <p> <%= @article.description %></p>
+  <div class="col-md-12 article-detail">
+    <%= image_tag(@article.img_name, class: "food-img", :size => "140x140") if @article.img_name? %>
+    <h1> <%= @article.name %> <br/><small><%= @article.category.name%></small></h1>
+    <p> <%= @article.description %></p>
+  </div>
 
-  <div class="col-md-3 ">
-  <% if !(current_user.admin?) %>	  
-    <% if current_user %>
+  <div>
+
+    <div class="col-md-6">
+
+      <% if !current_user.try(:admin?) %>
+
       <div class="btn-group">
+
         <%= link_to like_article_path(@article), method: :put, :class => "btn btn-success" do %>
-          <i class="glyphicon glyphicon-heart"></i>
+        <i class="glyphicon glyphicon-heart"></i>
         <% end %>
+
         <%= link_to dislike_article_path(@article), method: :put, :class => "btn btn-danger" do %>
-          <i class="glyphicon glyphicon-heart-empty"></i>
-        <% end %>
-      </div>
-    <% end %>
-    <%= @article.get_likes.size %>
-  <% end %>
-  </div>
-
-  <div class="col-md-3 ">
-    <% if current_user.try(:admin?) %>
-        <%= link_to edit_article_path(@article), :class => "btn btn-warning cart-btn" do %>
-          <i class="glyphicon glyphicon-edit"></i>
+        <i class="glyphicon glyphicon-heart-empty"></i>
         <% end %>
 
-        <%= link_to @article, method: :delete,
-          data: { confirm: "Artikel #{@article.name} löschen?" }, :class => "btn btn-danger cart-btn" do %>
-          <i class="glyphicon glyphicon-remove"></i>
-        <% end %>
-    <% end %>
-  </div>
-
-  <div class="col-md-6">
-  <% if !(current_user.admin?) %>
-    <%= form_for @order_item, remote: true do |f| %>
-      <div class = "col-md-4 col-md-offset-3">
-        <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
       </div>
 
-      <div class = "col-md-5">
+      <% end %>
+      <small>
+        <% @likes = @article.get_likes.size %>
+
+        <% if @likes < 0 %>
+          Dieses Essen schmeckt nicht.
+        <% elsif @likes == 0 %> 
+          Dieses Essen hat noch niemand bewertet, sei der Erste! 
+        <% elsif @likes > 1 %> 
+          <%= @likes %> Nutzer finden diese Speise lecker.
+        <% else %> 
+          <%= @likes %> Nutzer findet diese Speise lecker.
+        <% end %> 
+      </small>
+    </div>
+
+    <div class="col-md-2">
+
+      <% if current_user.try(:admin?) %>
+
+      <%= link_to edit_article_path(@article), :class => "btn btn-warning cart-btn" do %>
+      <i class="glyphicon glyphicon-edit"></i>
+      <% end %>
+
+      <%= link_to @article, method: :delete,
+      data: { confirm: "Artikel #{@article.name} löschen?" }, :class => "btn btn-danger cart-btn" do %>
+      <i class="glyphicon glyphicon-remove"></i>
+      <% end %>
+
+      <% end %>
+
+    </div>
+
+    <div class="col-md-4">
+      <% if !current_user.try(:admin?) %>
+        <%= form_for @order_item, remote: true do |f| %>
+
+        <div class = "col-md-4 col-md-offset-3">
+          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+        </div>
+
+        <div class = "col-md-5">
           <%= f.hidden_field :article_id, value: @article.id %>
           <%= @article.price %> €
+
           <%= button_tag(type: 'submit', class: "btn btn-primary cart-btn") do %>
-            <i class="glyphicon glyphicon-shopping-cart"></i>
+          <i class="glyphicon glyphicon-shopping-cart"></i>
           <% end %>
-      </div>
-    <% end %>
-  <% end %>
+
+        </div>
+
+        <% end %>
+      <% end %>
+    </div>
+
   </div>
 
 
