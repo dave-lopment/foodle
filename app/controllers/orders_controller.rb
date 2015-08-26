@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   
   def index
     @orders = Order.all
-    @status = OrderStatus.all
   end
 
   def destroy
@@ -13,7 +12,7 @@ class OrdersController < ApplicationController
 
   def deliver_order
     @order = Order.find(params[:order_id])
-    @order.order_status_id = 3
+    @order.Abgeschickt!
     @order.save
     redirect_to orders_path
   end

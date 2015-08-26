@@ -6,12 +6,12 @@
     <% @orders.each do |order| %>
     <tr>
       <td>
-        Status: <%= @status.find( order.order_status_id ).name %> <br/>
+        Status: <%= order.order_status %> <br/>
         An: <%= order.street %> <br/>
         <%= order.postal %> <%= order.city %> 
       </td>
       <td>
-        <%= link_to order, method: :delete,
+        <%= link_to order , method: :delete,
               data: { confirm: "Bestellung löschen?" }, :class => "btn btn-danger cart-btn" do %>
               <i class="glyphicon glyphicon-remove"></i>
         <% end %>

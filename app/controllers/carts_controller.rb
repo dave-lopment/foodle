@@ -13,7 +13,7 @@ class CartsController < ApplicationController
     @order.street = params[:street]
     @order.postal = params[:postal]
     @order.city = params[:city]
-    @order.order_status_id = 2;
+    @order.Auftrag!;
     @order.save!
     @pay = params[:payment]
   end
@@ -22,7 +22,7 @@ class CartsController < ApplicationController
     @order = current_order
     if @order.try(:order_status_id)
       if (@order.order_status_id > 1 )
-        @order.order_status_id = 1;
+        @order.Erstellung!;
         @order.save
         redirect_to :back
       end

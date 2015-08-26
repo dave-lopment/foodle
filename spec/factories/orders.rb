@@ -7,7 +7,7 @@ FactoryGirl.define do
     street "Die Opferstr. 50"
     postal 12345
     city "St. Kevinston"
-    order_status nil
+    order_status 0
   end
 
 end

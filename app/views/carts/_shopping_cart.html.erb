@@ -18,13 +18,13 @@
 <% end %>
 <div>
   <% if @order_items.try(:count) > 0 %>
-    <% if current_order.order_status_id == 1 %>
+    <% if current_order.Erstellung? %>
 
       <%= link_to confirm_order_path, :class => "btn btn-success cart-btn pull-right" do %>
         <i class="glyphicon glyphicon-ok"> Bestellen</i>
       <% end %>
 
-    <% elsif current_order.order_status_id == 2  %>
+    <% elsif current_order.Auftrag?  %>
 
       <%= link_to cancel_order_path, data: { confirm: "Bestellung stornieren?" },
         :class => "btn btn-danger cart-btn pull-right" do %>
@@ -33,4 +33,4 @@
     <% end %>
   <% end %>
 </div>
-          Status: <%= OrderStatus.all.find( current_order.order_status_id ).name %>
+          Status: <%= current_order.order_status %>

@@ -17,14 +17,16 @@ RSpec.describe Order, type: :model do
     end
   
     it 'expect count of elements with higher quantity then 1 to be correct' do
+     # orderStatus = FactoryGirl.create(:order_status)
       orderItem1 = FactoryGirl.create(:order_item, quantity: 5)
       order = FactoryGirl.create(:order, order_items: [orderItem1])
       expect(order.count).to be_equal(5)
     end
   
     it 'expect order_status not to be nil' do
+     # orderStatus = FactoryGirl.create(:order_status)
       order = Order.create()
-      expect(order[:order_status_id]).not_to be_nil
+      expect(order[:order_status]).not_to be_nil
     end
   
     it 'expect subtotal updated after save'
