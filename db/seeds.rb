@@ -7,10 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'ffaker'
 
-# Article.delete_all
-# User.delete_all
-# Category.delete_all
-
 if User.all.count == 0
   40.times do |n|
     name = FFaker::Name.name
@@ -52,109 +48,26 @@ if (User.find_by(email: "peter@unlustig.de") == nil)
                 admin: false)
 end
 
-if (Category.find_by(name: "Vorspeise") == nil)
-  @category = Category.create! name: "Vorspeise"
+Category.create! name: "Vorspeise" unless(Category.find_by(name: "Vorspeise") != nil)
+Category.create! name: "Salat" unless(Category.find_by(name: "Salat") != nil)
+Category.create! name: "Pizza" unless(Category.find_by(name: "Pizza") != nil)
+Category.create! name: "Pasta" unless(Category.find_by(name: "Pasta") != nil)
+Category.create! name: "Lasagne" unless(Category.find_by(name: "Lasagne") != nil)
+Category.create! name: "Schwein" unless(Category.find_by(name: "Schwein") != nil)
+Category.create! name: "Rind" unless(Category.find_by(name: "Rind") != nil)
+Category.create! name: "Geflügel" unless(Category.find_by(name: "Geflügel") != nil)
+Category.create! name: "Dessert" unless(Category.find_by(name: "Dessert") != nil)
 
-  6.times do |n|
+Category.all.each do |cat| 
+  6.times do |n| 
     name = FFaker::Food.meat
     description = "This is a very long description. In fact, it is so long, that
     Foodle will hopefully not display its full text. Usually a description
     contains ingredients and things like that. Now have som bla's: bla bla bla."
     price = n + 1.00
-    @category.articles.create!(name: name,
+    cat.articles.create!(name: name,
                     description: description,
                     price: price,
                     isVegetarian: false)
-  end unless(@category.articles.count > 0)
-end
-
-if (Category.find_by(name: "Salat") == nil)
-  @category = Category.create! name: "Salat"
-  6.times do |n|
-    name = FFaker::Food.meat
-    description = FFaker::Food.ingredient
-    price = n + 1.00
-    @category.articles.create!(name: name,
-                    description: description,
-                    price: price,
-                    isVegetarian: false)
-  end unless(@category.articles.count > 0)
-end
-
-if (Category.find_by(name: "Pizza") == nil)
-  @category = Category.create! name: "Pizza"
-  6.times do |n|
-    name = FFaker::Food.meat
-    description = FFaker::Food.ingredient
-    price = n + 1.00
-    @category.articles.create!(name: name,
-                    description: description,
-                    price: price,
-                    isVegetarian: false)
-  end unless(@category.articles.count > 0)
-end
-
-if (Category.find_by(name: "Pasta") == nil)
-  @category = Category.create! name: "Pasta"
-  6.times do |n|
-    name = FFaker::Food.meat
-    description = FFaker::Food.ingredient
-    price = n + 1.00
-    @category.articles.create!(name: name,
-                    description: description,
-                    price: price,
-                    isVegetarian: false)
-  end unless(@category.articles.count > 0)
-end
-
-Category.create! name: "Lasagne" unless(Category.find_by(name: "Lasagne") != nil)
-
-if (Category.find_by(name: "Schwein") == nil)
-  @category = Category.create! name: "Schwein"
-  6.times do |n|
-    name = FFaker::Food.meat
-    description = FFaker::Food.ingredient
-    price = n + 1.00
-    @category.articles.create!(name: name,
-                    description: description,
-                    price: price,
-                    isVegetarian: false)
-  end unless(@category.articles.count > 0)
-end
-
-if (Category.find_by(name: "Rind") == nil)
-  Category.create! name: "Rind"
-    @category = Category.create! name: "Geflügel"
-    6.times do |n|
-      name = FFaker::Food.meat
-      description = FFaker::Food.ingredient
-      price = n + 1.00
-      @category.articles.create!(name: name,
-                      description: description,
-                      price: price,
-                      isVegetarian: false)
-    end unless(@category.articles.count > 0)
-end
-
-if (Category.find_by(name: "Dessert") == nil)
-  @category = Category.create! name: "Dessert"
-    6.times do |n|
-      name = FFaker::Food.meat
-      description = FFaker::Food.ingredient
-      price = n + 1.00
-      @category.articles.create!(name: name,
-                      description: description,
-                      price: price,
-                      isVegetarian: false)
-    end unless(@category.articles.count > 0)
-end
-
-# 30.times do |n|
-#   name = FFaker::Food.meat
-#   description = FFaker::Food.ingredient
-#   price = n + 1.00
-#   Article.create!(name: name,
-#                   description: description,
-#                   price: price,
-#                   isVegetarian: false)
-# end
+  end unless(cat.articles.count > 0)
+end 
