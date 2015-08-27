@@ -11,13 +11,19 @@ feature "Admin logs in and sees the 'Stammdaten' page (article#index)" do
 	    end
 	  	  click_button 'Anmelden'
   	end
+
+  	def create_dummy_article
+  		@article = create(:article)
+  	end 
 	
 
 	let(:admin){FactoryGirl.create(:user, admin: true)}
+	let(:article){FactoryGirl.create(:article)}
 
 	before(:each) do 
 		# loggin in as admin redirects to the Stammdaten page!
 		log_in_as(admin)
+		visit articles_path
 	end 
 
 	scenario "he sees categories' buttons"
