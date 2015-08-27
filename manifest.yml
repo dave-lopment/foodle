@@ -9,4 +9,4 @@ applications:
     STACK: cedar
     RAILS_ENV: production
     EMAIL_USERNAME: videoapp@adherry.de
-    EMAIL_PASSWORD: '&crerhS8Hhmx'
+    EMAIL_PASSWORD: '%aU5gsrungkW'

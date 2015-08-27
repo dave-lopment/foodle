@@ -71,3 +71,4 @@ config/secrets.yml
 .rvmrc
 
 public/assets
+manifest.yml
