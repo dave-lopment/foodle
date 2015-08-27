@@ -1,7 +1,7 @@
 <div class="btn-group category-btns">
-	<%= link_to "Alle", articles_path, class: "btn btn-default" %>
+	<%= link_to "Alle", bestellen_path, class: "btn btn-default" %>
 	<% @categories.each do |category| %>
-	<%= link_to category.name, articles_path(filter: category.id), class: "btn btn-default category-btn" %>
+	<%= link_to category.name, bestellen_path(filter: category.id), class: "btn btn-default category-btn" %>
 	<% end %>
 </div>
 
