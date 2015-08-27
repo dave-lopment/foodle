@@ -8,7 +8,8 @@ RSpec.describe ArticlesController, type: :controller do
       expect(assigns(:articles)).to eq([article])
     end
 
-    it "renders the :index view" do
+    it "renders the :index view for admins" do
+      sign_in(create(:user, admin:true))
       get :index
       expect(response).to render_template(:index)
     end

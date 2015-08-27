@@ -40,7 +40,6 @@ gem 'bootstrap-sass', '~> 3.3.5.1'
 
 gem 'carrierwave'
 gem 'fog',                     '1.33.0'
-gem 'rails_12factor'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -70,5 +69,6 @@ group :development, :test do
 end
 
 group :production do
+  gem 'rails_12factor'
   gem 'a9s_swift'
 end 
