@@ -47,36 +47,6 @@ feature "the login process" do
         expect(page).to have_content 'Willkommen bei Foodle!'
       end
   
-      scenario "Logged in user got account functions" do
-        log_in_as(user)
-        expect(page).to have_content 'Account'
-        expect(page).to have_content 'Profil bearbeiten'
-        expect(page).to have_content 'Passwort ändern'
-        expect(page).to have_content 'Abmelden'
-        expect(page).not_to have_content 'Anmelden'
-        expect(page).not_to have_content 'Registrieren'
-      end
-  
-      scenario "After log out user functions should be dissappeared" do
-        log_in_as(user)
-        click_on 'Abmelden'
-        expect(page).to have_content 'Anmelden'
-        expect(page).to have_content 'Registrieren'
-      end
-      
-      # Refactor SignIn with Warden Gem
-      scenario "expect edit-user link direct to the right url" do
-        log_in_as(user)
-        click_on 'Profil bearbeiten'
-        expect(current_path).to eq(edit_user_path(user))
-      end
-  
-      scenario "expect edit-password link direct to the right url" do
-        log_in_as(user)
-        click_on 'Passwort ändern'
-        expect(current_path).to eq(edit_user_registration_path(user))
-      end
-  
       scenario "expect delete-button to be in user-edit" do
         log_in_as(user)
         click_on 'Profil bearbeiten'

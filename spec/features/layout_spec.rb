@@ -60,25 +60,54 @@ feature "general layout" do
 		let (:user){FactoryGirl.create(:user)}
 		subject{user}
 
+        before(:each) do 
+            log_in_as(user)
+        end 
+
 		scenario "has a link to home page" do 
-			log_in_as(user) 
 			expect(page).to have_link('', :href => root_path)
 		end 
 
 		scenario "has a link to articles#bestellen" do 
-			log_in_as(user) 
 			expect(page).to have_link('', :href => bestellen_path)
 		end 
 
 		scenario "has a link to orders#user_oders" do 
-			log_in_as(user) 
 			expect(page).to have_link('', :href => user_orders_path)
 		end 
 
         scenario "does not have an Admin flag" do 
-            log_in_as(user)
             expect(page).not_to have_content('(Admin)')
         end 
+
+        scenario "has correct 'Account' functions" do
+            expect(page).to have_content 'Account'
+            expect(page).to have_content 'Profil bearbeiten'
+            expect(page).to have_content 'Passwort ändern'
+            expect(page).to have_content 'Abmelden'
+            expect(page).not_to have_content 'Anmelden'
+            expect(page).not_to have_content 'Registrieren'
+        end
+  
+        scenario "has no Account functions after log-out but 'Anmelden' and 'Registrieren'" do
+            click_on 'Abmelden'
+            expect(page).not_to have_content 'Account'
+            expect(page).not_to have_content 'Profil bearbeiten'
+            expect(page).not_to have_content 'Passwort ändern'
+            expect(page).not_to have_content 'Abmelden'
+            expect(page).to have_content 'Anmelden'
+            expect(page).to have_content 'Registrieren'
+        end
+          
+        scenario "expect edit-user link direct to the right url" do
+            click_on 'Profil bearbeiten'
+            expect(current_path).to eq(edit_user_path(user))
+        end
+
+        scenario "expect edit-password link direct to the right url" do
+            click_on 'Passwort ändern'
+            expect(current_path).to eq(edit_user_registration_path(user))
+        end
 
 	end 
 
