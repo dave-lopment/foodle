@@ -53,15 +53,15 @@ RSpec.describe OrdersController, type: :controller do
     context "Admin" do
       before(:each) do
         sign_in(create(:user, admin:true))
-	order = create(:order)
+        @order = create(:order)
       end
       it "assigns the requested order to @order" do
-        get :show, id: order
-        expect(assigns(:order)).to eq(order)
+        get :show, id: @order
+        expect(assigns(:order)).to eq(@order)
       end
 
       it "renders the :show template" do
-	get :show, id: order
+	get :show, id: @order
 	expect(response).to render_template(:show)
       end
 
@@ -69,8 +69,9 @@ RSpec.describe OrdersController, type: :controller do
 
     context "User" do
       before(:each) do
-        user1 = create(:user)
-	user1.orders.create(:order)
+        @user1 = create(:user)
+	order_attr = (FactoryGirl.attributes_for(:order)).except(:user_id)
+	@user1.orders.create(order_attr)
       end
 
       it "does not show order to wrong user" do
@@ -81,8 +82,8 @@ RSpec.describe OrdersController, type: :controller do
       end
 	
       it "shows order to the user" do
-	sign_in(user1)
-	get :show, id: user1.orders.first
+	sign_in(@user1)
+	get :show, id: @user1.orders.first
 	expect(response).to render_template(:show)
       end
     end
@@ -101,9 +102,10 @@ RSpec.describe OrdersController, type: :controller do
 
   describe "GET #deliver_order" do
     before(:each) do
-      user1 =create(:user)
-      user1.orders.create(:order)
-      order = user1.orders.first
+      @user1 =create(:user)
+      order_attr = FactoryGirl.attributes_for(:order).except(:user_id)
+      @user1.orders.create(order_attr)
+      @order = user1.orders.first
     end
 
     context "Admin" do
@@ -112,29 +114,29 @@ RSpec.describe OrdersController, type: :controller do
       end
    
       it "changes order status to Abgeschickt" do
-        get :deliver_order, order_id: order[:id]
-	expect{order.order_status}.to change{order.Abgeschickt?}.from(false).to(true)
+        get :deliver_order, order_id: @order[:id]
+	expect{@order.order_status}.to change{@order.Abgeschickt?}.from(false).to(true)
       end
 
       it "redirects after change status" do
-        get :deliver_order, order_id: order[:id]
+        get :deliver_order, order_id: @order[:id]
 	expect(response).to redirect_to(orders_path)
       end
     end
 
     context "User" do
       before(:each) do
-        sign_in(user1)
+        sign_in(@user1)
       end
 
       it "does not change order status to Abgeschickt" do
-        get :deliver_order, order_id: order[:id]
-	expect{order.order_status}.not_to change{order.Abgeschickt?}.from(false).to(true)
+        get :deliver_order, order_id: @order[:id]
+	expect{@order.order_status}.not_to change{@order.Abgeschickt?}.from(false).to(true)
       end
 
       it "redirects without changing status" do
-        get :deliver_order, order_id: order[:id]
-	expect(response).to redirect_to(user_orders_path)
+        get :deliver_order, order_id: @order[:id]
+	expect(response).to redirect_to(meine_bestellungen_path)
       end
 
     end
@@ -142,12 +144,12 @@ RSpec.describe OrdersController, type: :controller do
     context "No User" do
 
       it "does not change order status to Abgeschickt" do
-        get :deliver_order, order_id: order[:id]
-	expect{order.order_status}.not_to change{order.Abgeschickt?}.from(false).to(true)
+        get :deliver_order, order_id: @order[:id]
+	expect{@order.order_status}.not_to change{@order.Abgeschickt?}.from(false).to(true)
       end
 
       it "redirects without changing status" do
-        get :deliver_order, order_id: order[:id]
+        get :deliver_order, order_id: @order[:id]
 	expect(response).to redirect_to(bestellen_path)
       end
 
@@ -161,7 +163,7 @@ RSpec.describe OrdersController, type: :controller do
       it "renders the :index template" do
         sign_in(create(:user, admin:true))
 	get :user_orders
-	expect(response).to render_template(:index)
+	expect(response).to redirect_to(orders_path)
       end     
     end
 

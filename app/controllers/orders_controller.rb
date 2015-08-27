@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
-  before_action :admin_user, only: [:index]
+  before_action :allow_only_admin, only: [:index, :deliver_order, :destroy]
+  before_action :allow_only_user, only: [:user_orders]
   
   def index
     @orders = Order.all
@@ -15,6 +16,10 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
+  def show
+    @order = Order.find(params[:id])
+  end
+
   def deliver_order
     @order = Order.find(params[:order_id])
     @order.Abgeschickt!
@@ -23,21 +28,20 @@ class OrdersController < ApplicationController
   end
 
   def user_orders
-    @orders = current_user.orders
-  end
-
-  def show
-    @order = Order.find(params[:id])
+    @orders = current_user.orders.all
   end
 
   private
 
-    def admin_user
-      if current_user
-        @user = current_user
-        redirect_to(articles_path) unless @user[:admin] == true
-      else
-	redirect_to(articles_path)
+    def allow_only_admin
+      if (!current_user.try(:admin?))
+        redirect_to(meine_bestellungen_path)
+      end
+    end
+
+    def allow_only_user
+      if current_user.try(:admin?)
+        redirect_to(orders_path)
       end
     end
 end
