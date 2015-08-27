@@ -2,7 +2,15 @@ require 'rails_helper'
 
 RSpec.describe ArticlesController, type: :controller do
   describe "GET #index" do
-    it "assings @articles" do
+    it "assigns @categories for admins" do 
+      sign_in(create(:user, admin: true))
+      category = create(:category) 
+      get :index 
+      expect(assigns(:categories)). to eq([category])
+    end 
+
+    it "assings @articles for admins" do
+      sign_in(create(:user, admin: true))
       article = create(:article)
       get :index
       expect(assigns(:articles)).to eq([article])
@@ -13,39 +21,93 @@ RSpec.describe ArticlesController, type: :controller do
       get :index
       expect(response).to render_template(:index)
     end
+
+    it "redirects to the bestellungen view for normal users" do 
+      sign_in(create(:user))
+      get :index 
+      expect(response).to redirect_to(bestellen_path)
+    end 
+
+    it "redirects to the bestellungen view for everyone else" do 
+      get :index 
+      expect(response).to redirect_to(bestellen_path)
+    end 
   end
 
-  describe "GET #show" do
-    it "assigns the requested article to @article" do
-      article = create(:article)
-      get :show, id: article
-      expect(assigns(:article)).to eq(article)
-    end
+  describe "GET #bestellen" do 
 
-    it "renders the :show template" do
+    it "assigns @categories" do 
+      category = create(:category) 
+      get :bestellen 
+      expect(assigns(:categories)). to eq([category])
+    end 
+
+    it "assigns @articles" do
       article = create(:article)
-      get :show, id: article
-      expect(response).to render_template(:show)
+      get :bestellen 
+      expect(assigns(:articles)).to eq([article])
     end
+    
+    it "redirects to the index view for admins" do 
+      sign_in(create(:user, admin: true))
+      get :bestellen 
+      expect(response).to redirect_to(articles_path)
+    end 
+
+    it "renders the bestellen view for normal users" do 
+      sign_in(create(:user))
+      get :bestellen 
+      expect(response).to render_template(:bestellen)
+    end 
+
+    it "renders the bestellen view for everyone else" do 
+      get :bestellen 
+      expect(response).to render_template(:bestellen)
+    end
+  end 
+
+  describe "GET #show" do
+    context "admin" do 
+      before(:each) do
+        sign_in(create(:user, admin: true))
+      end
+      it "assigns the requested article to @article" do
+        article = create(:article)
+        get :show, id: article
+        expect(assigns(:article)).to eq(article)
+      end
+
+      it "renders the :show template" do
+        article = create(:article)
+        get :show, id: article
+        expect(response).to render_template(:show)
+      end
+    end 
   end
 
   describe "GET #new" do
-    before(:each) do
-    sign_in(create(:user, admin: true))
-    end
-    it "assigns a new Article to @article" do
-      get :new
-      expect(assigns(:article)).to be_a(Article)
-    end
-    it "renders the :new template" do
-      get :new
-      expect(response).to render_template :new
-    end
+    context "admin" do 
+      before(:each) do
+        sign_in(create(:user, admin: true))
+      end
+      it "assigns a new Article to @article" do
+        get :new
+        expect(assigns(:article)).to be_a(Article)
+      end
+      it "renders the :new template" do
+        get :new
+        expect(response).to render_template :new
+      end
+    end 
   end
 
   describe "POST #create" do
 
-    context "with valid params" do
+    context "as admin with valid params" do
+      before(:each) do 
+        sign_in(create(:user, admin: true))
+      end 
+
       it "creates a new Article" do
         expect{
           post :create, { article: attributes_for(:article)}
@@ -53,7 +115,11 @@ RSpec.describe ArticlesController, type: :controller do
       end
     end
 
-    context "with invalid attributes" do
+    context "as admin with invalid attributes" do
+      before(:each) do 
+        sign_in(create(:user, admin: true))
+      end 
+
       it "does not save the new article in the database" do
         expect{
           post :create, { article: attributes_for(:article, :fresh_article) }

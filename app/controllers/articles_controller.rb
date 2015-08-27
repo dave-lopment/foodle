@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :admin_user, only: [:edit, :new]
+  before_action :allow_only_admin, only: [:index, :new, :create, :edit, :update, :destroy, :show]
+  before_action :allow_only_normal_user, only: [:bestellen]
 
   def new
     @article = Article.new
@@ -15,10 +17,13 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @categories = Category.all
-    @articles = Article.filter(params[:filter]).paginate(:page => params[:page], :per_page => 10)
-    @order_item = current_order.order_items.new
+    applyAttributes
+
   end
+
+  def bestellen 
+    applyAttributes
+  end 
 
   def show
     @article = Article.find(params[:id])
@@ -67,7 +72,25 @@ class ArticlesController < ApplicationController
         @user = current_user
         redirect_to(articles_path) unless @user[:admin] == true
       else
-	redirect_to(articles_path)
+	     redirect_to(articles_path)
       end
     end
+
+    def applyAttributes  
+      @categories = Category.all
+      @articles = Article.filter(params[:filter]).paginate(:page => params[:page], :per_page => 10)
+      @order_item = current_order.order_items.new
+    end 
+
+    def allow_only_admin 
+      if !current_user.try(:admin?) 
+        redirect_to bestellen_path
+      end  
+    end 
+
+    def allow_only_normal_user 
+      if current_user.try(:admin?)
+        redirect_to articles_path
+      end
+    end 
 end

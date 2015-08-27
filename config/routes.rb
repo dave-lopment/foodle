@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'bestellen', to: 'articles#bestellen'
   get 'confirm_order', to: 'carts#confirm_order'
   post 'confirm_order_details', to: 'carts#confirm_order_details'
   get 'cancel_order',  to: 'carts#cancel_order'
