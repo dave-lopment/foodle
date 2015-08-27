@@ -5,7 +5,7 @@ class OrderItemsController < ApplicationController
     if @order_item.nil? 
       then
         @order_item = @order.order_items.new(order_item_params)
-	if(user_signed_in? && @order[:id] == -1)
+	if(user_signed_in? && @order[:user_id] == -1)
 	  then
 	    @order.user_id = current_user.id
 	end    
