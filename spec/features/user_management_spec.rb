@@ -26,11 +26,6 @@ feature "the login process" do
   context "Admin Tests" do
     let(:admin){FactoryGirl.create(:user, {email: "peter@lustig.de", password: "12345678", password_confirmation: "12345678", admin: true})}
     subject{admin}
-
-      scenario "admin user got admin-flag in navbar" do
-        log_in_as(admin)
-        expect(page).to have_content '(Admin)'
-      end
   
       scenario "expect Admin to have a button to add an article" do
         log_in_as(admin)
@@ -50,10 +45,6 @@ feature "the login process" do
       scenario "sign in" do
         log_in_as(user)
         expect(page).to have_content 'Willkommen bei Foodle!'
-      end
-      scenario "normal user got no admin-flag in navbar" do
-        log_in_as(user)
-        expect(page).not_to have_content '(Admin)'
       end
   
       scenario "Logged in user got account functions" do
@@ -147,10 +138,10 @@ feature "the login process" do
      
   end
 
-  scenario "expect Bestellen Button in Navbar links to correct path" do
+  scenario "expect Bestellen Button in Navbar links to correct path for normal users" do
     visit new_user_session_path
     click_on 'Bestellen'
-    expect(current_path).to eq(articles_path)
+    expect(current_path).to eq(bestellen_path)
   end
 
 
