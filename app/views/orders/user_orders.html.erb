@@ -3,6 +3,7 @@
     <tr>
       <td>Info</td><td>Aktionen</td>
     </tr>
+    <% if @orders.count > 0 %>
     <% @orders.each do |order| %>
       <% if !(order.Erstellung?) %>
         <tr>
@@ -18,21 +19,18 @@
                   <i class="glyphicon glyphicon-remove"></i>
 	    <% end %>
 
-          <% else if order.Abgeschickt? %>
-            <%= link_to "Geliefert",  delivered_order_path, :class => "btn btn-success cart-btn" do %>
+          <% elsif order.Abgeschickt? %>
+            <%= link_to "Geliefert",  delivered_order_path, :class => "btn btn-success cart-btn"%>
 	  <% else %>
-            <%= image_tag , :class => "btn btn-primary cart-btn" do %>
-	    <% end %>
+            <%= button_to "Stornieren",  :class => "btn btn-primary cart-btn" %>
           <% end %>
-	    Hier eventuell auch noch eine andere View angeben, deren Pfad den Nutzer und die Order-ID bekommt,
-	    um sicherzustellen, dass nur der Besteller die Order anschauen kann.
             <%= link_to "Details", order_path(order.id), :class => "btn btn-primary cart-btn" %>
           
           </td>
         </tr>
       <% end %>  
     <% end %> 
-
+  <% end %>
   </table>
 
 
