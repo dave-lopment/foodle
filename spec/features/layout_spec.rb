@@ -15,7 +15,6 @@ feature "general layout" do
 
 	context "navbar as admin" do 
 		let(:admin){FactoryGirl.create(:user, admin: true)}
-    	subject{admin}
 
         before(:each) do 
             log_in_as(admin)
