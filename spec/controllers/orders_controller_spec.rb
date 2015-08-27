@@ -7,9 +7,10 @@ RSpec.describe OrdersController, type: :controller do
     context "admin user" do
 
         it "assings @orders" do
+	  sign_in(create(:user, admin:true))
 	  order = create(:order)
 	  get :index
-	  expect(assings(:orders)).to eq([order])
+	  expect(assigns(:orders)).to eq([order])
 	end
 
 	it "renders the :index view" do
@@ -70,6 +71,33 @@ RSpec.describe OrdersController, type: :controller do
         expect {
 	  delete :destroy, :id => order.id
 	}.to change(Order, :count).by(-1)
+      end
+    end
+
+  end
+
+  describe "GET #user_index" do
+
+    context "Admin" do
+      it "renders the :index template" do
+        sign_in(create(:user, admin:true))
+	get :user_orders
+	expect(response).to render_template(:index)
+      end     
+    end
+
+    context "User" do
+      it "renders the :user_index template" do
+        sign_in(create(:user))
+	get :user_orders
+	expect(response).to render_template(:user_orders)
+      end
+    end
+
+    context "No User" do
+      it "renders the :articles template" do
+	get :user_orders
+	expect(reponse).to redirect_to(articles_path)
       end
     end
 

@@ -19,11 +19,13 @@ if User.all.count == 0
     admin = false
     User.create!( name: name,
                   password: password,
+		  password_confirmation: password,
                   street: street,
                   city: city,
                   postal: postal,
                   email: email,
-                  admin: admin)
+                  admin: admin,
+		  confirmed_at: Date.today)
   end
 end
 
@@ -31,10 +33,12 @@ if (User.find_by(name: "Peter Lustig") == nil)
   User.create!( name: "Peter Lustig",
                 email: "peter@lustig.de",
                 password: "12345678",
+		password_confirmation: "12345678",
                 street: "Der Admin-Garten 1",
                 city: "Stadtmin",
                 postal: "11111",
-                admin: true)
+                admin: true,
+	        confirmed_at: Date.today)
 end
 
 
@@ -42,10 +46,12 @@ if (User.find_by(email: "peter@unlustig.de") == nil)
   User.create!( name: "Peter Unlustig",
                 email: "peter@unlustig.de",
                 password: "12345678",
+		password_confirmation: "12345678",
                 street: "Der Normale-User-Garten 99",
                 city: "Stadt",
                 postal: "11111",
-                admin: false)
+                admin: false,
+	        confirmed_at: Date.today)
 end
 
 Category.create! name: "Vorspeise" unless(Category.find_by(name: "Vorspeise") != nil)

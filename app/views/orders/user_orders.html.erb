@@ -1,0 +1,40 @@
+<div class="col-md-8 col-md-offset-2">
+  <table class="table table-striped">
+    <tr>
+      <td>Info</td><td>Aktionen</td>
+    </tr>
+    <% @orders.each do |order| %>
+      <% if !(order.Erstellung?) %>
+        <tr>
+          <td>
+            Status: <%= order.order_status %> <br/>
+            An: <%= order.street %> <br/>
+            <%= order.postal %> <%= order.city %> 
+          </td>
+	  <td>
+	  <% if order.Auftrag? %>
+            <%= link_to cancel_order_path , method: :delete,
+                  data: { confirm: "Bestellung stornieren?" }, :class => "btn btn-danger cart-btn" do %>
+                  <i class="glyphicon glyphicon-remove"></i>
+	    <% end %>
+
+          <% else if order.Abgeschickt? %>
+            <%= link_to "Geliefert",  delivered_order_path, :class => "btn btn-success cart-btn" do %>
+	  <% else %>
+            <%= image_tag , :class => "btn btn-primary cart-btn" do %>
+	    <% end %>
+          <% end %>
+	    Hier eventuell auch noch eine andere View angeben, deren Pfad den Nutzer und die Order-ID bekommt,
+	    um sicherzustellen, dass nur der Besteller die Order anschauen kann.
+            <%= link_to "Details", order_path(order.id), :class => "btn btn-primary cart-btn" %>
+          
+          </td>
+        </tr>
+      <% end %>  
+    <% end %> 
+
+  </table>
+
+
+
+</div>

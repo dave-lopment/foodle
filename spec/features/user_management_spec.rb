@@ -24,7 +24,7 @@ feature "the login process" do
   end
   
   context "Admin Tests" do
-    let(:admin){FactoryGirl.create(:user, {email: "peter@lustig.de", password: "12345678", admin: true})}
+    let(:admin){FactoryGirl.create(:user, {email: "peter@lustig.de", password: "12345678", password_confirmation: "12345678", admin: true})}
     subject{admin}
 
       scenario "admin user got admin-flag in navbar" do
@@ -44,7 +44,7 @@ feature "the login process" do
   end
 
   context "Normal User Tests" do
-    let(:user) { FactoryGirl.create(:user, {email: "user@example.de", password: "password"})}
+    let(:user) { FactoryGirl.create(:user, {email: "user@example.de", password: "password", password_confirmation: "password"})}
     subject {user}
 
       scenario "sign in" do
@@ -115,7 +115,7 @@ feature "the login process" do
   end
 
   context "Admin and User Tests" do
-    let(:admin) { FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', admin: true    })}
+    let(:admin) { FactoryGirl.create(:user, {email: "user@example.de", password: '12345678', password_confirmation: '12345678', admin: true    })}
     subject{admin}
 
       scenario "expect Admin to have edit-button in Alle Nutzer" do
@@ -135,7 +135,7 @@ feature "the login process" do
   end
 
   context "User and User Tests" do
-    let (:user){FactoryGirl.create(:user, {email: "user@example.de", password: '12345678'    })}
+    let (:user){FactoryGirl.create(:user, {email: "user@example.de", password: '12345678' , password_confirmation: '12345678'   })}
     subject{user}
 
       scenario "expect User not to have a Benutzer Button" do
