@@ -16,16 +16,15 @@ class CartsController < ApplicationController
     @order.Auftrag!;
     @order.save!
     @pay = params[:payment]
+    #@order = Order.new.save!
   end
 
   def cancel_order
     @order = current_order
-    if @order.try(:order_status_id)
-      if (@order.order_status_id > 1 )
+      if (@order.Auftrag? )
         @order.Erstellung!;
         @order.save
         redirect_to :back
       end
-    end
   end
 end

@@ -26,7 +26,6 @@ require 'capybara/rspec'
 require 'capybara/rails'
 
 RSpec.configure do |config|
-  config.include Warden::Test::ControllerHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   DatabaseCleaner.strategy = :truncation
@@ -37,13 +36,8 @@ RSpec.configure do |config|
     ensure
       DatabaseCleaner.clean
     end
-  config.after do
-    Warden.test_reset!
   end
-    def sign_in(user)
-      Warden.set_user(user)
-    end
-  end
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -66,7 +60,7 @@ RSpec.configure do |config|
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
   end
-
+ 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
