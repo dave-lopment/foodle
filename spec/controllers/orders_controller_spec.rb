@@ -19,9 +19,19 @@ RSpec.describe OrdersController, type: :controller do
         end
     end
 
-    context "normal user or no user" do
+    context "user" do
+      before(:each){sign_in(create(:user))}
 
       it "redirects user trying to get index orders" do
+        get :index
+	expect(response).to redirect_to(meine_bestellungen_path)
+      end
+
+    end
+
+    context "No user" do
+
+      it "redirects no user trying to get index orders" do
         get :index
         expect(response).to redirect_to(bestellen_path)
       end
