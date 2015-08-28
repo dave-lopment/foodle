@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'order management user facing' do
-  let(:order) {create(:order, {order_items: [order_item], user_id: [user.id]})}
-  let(:order_item){create(:order_item)}
   let(:user) {create(:user)}
+  let(:order) {create(:order, :order_items => [order_item], :user_id => user.id)}
+  let(:order_item){create(:order_item)}
   #TODO Put log_in_as(user) and set_order_status to a test_helper file
 
   def log_in_as(user)
@@ -74,7 +74,7 @@ feature 'order management user facing' do
         expect(page).to have_content 'Stornieren'
       end
  
-      scenario "after clicking 'Stornieren' Status changed" do
+      scenario "after clicking 'Stornieren' Status changed (Nicht möglich ohne JS("do
         click_link 'Stornieren'
         expect(page).to have_content 'Storniert'
       end
@@ -89,7 +89,7 @@ feature 'order management user facing' do
       end
 
       scenario "Detail View got a 'zurück'-Button" do
-        expect(page).to have_button 'Zurück'
+        expect(page).to have_link 'Zurück'
       end
  
       scenario "Detail View got a column for article quantity" do

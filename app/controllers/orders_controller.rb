@@ -29,6 +29,13 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
+  def received_order
+    @order = Order.find(params[:order_id])
+    @order.Angekommen!
+    @order.save
+    redirect_to meine_bestellungen_path
+  end
+
   def user_orders
     @orders = Order.where(user_id: current_user[:id])
     

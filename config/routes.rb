@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   post 'confirm_order_details', to: 'carts#confirm_order_details'
   get 'cancel_order',  to: 'carts#cancel_order'
   get 'meine_bestellungen', to: 'orders#user_orders'
+  get 'received_order', to: 'orders#received_order'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

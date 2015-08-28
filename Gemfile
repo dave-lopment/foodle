@@ -62,9 +62,9 @@ group :development, :test do
   gem 'factory_girl_rails', '4.5.0'
   gem 'rspec-rails', '3.3.3'
   gem 'database_cleaner'
-  gem 'capybara', '2.4.4'
-  gem 'warden-rspec-rails', '0.1.0'
 
+  gem 'warden-rspec-rails', '0.1.0'
+  gem 'selenium-webdriver'
   gem 'letter_opener' 
 end
 

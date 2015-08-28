@@ -21,10 +21,13 @@ class CartsController < ApplicationController
 
   def cancel_order
     @order = current_order
-      if (@order.Auftrag? )
-        @order.Erstellung!;
+      if (@order.Auftrag?)
+        @order.Storniert!
         @order.save
-        redirect_to :back
+      else 
+	@order.Angekommen!
+	@order.save
       end
+    redirect_to :back
   end
 end

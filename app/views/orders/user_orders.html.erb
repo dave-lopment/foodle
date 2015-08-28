@@ -14,12 +14,9 @@
           </td>
 	  <td>
 	  <% if order.Auftrag? %>
-            <%= link_to cancel_order_path , data: { confirm: "Bestellung stornieren?" }, :class => "btn btn-danger cart-btn" do %>
-                  <i class="glyphicon glyphicon-ok">Stornieren</i>
-	    <% end %>
-
+            <%= link_to "Stornieren", cancel_order_path , data: { confirm: "Bestellung stornieren?" }, :class => "btn btn-danger cart-btn" %>
           <% elsif order.Abgeschickt? %>
-            <%= link_to "Geliefert",  delivered_order_path, :class => "btn btn-success cart-btn"%>
+		  <%= link_to "Geliefert",  received_order_path(:order_id => order.id), :class => "btn btn-success cart-btn"%>
           <% end %>
             <%= link_to "Details", order_path(order.id), :class => "btn btn-primary cart-btn" %>
           
