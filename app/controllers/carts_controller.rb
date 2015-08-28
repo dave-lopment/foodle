@@ -20,13 +20,10 @@ class CartsController < ApplicationController
   end
 
   def cancel_order
-    @order = current_order
+    @order = Order.find(params[:order_id])
       if (@order.Auftrag?)
         @order.Storniert!
         @order.save
-      else 
-	@order.Angekommen!
-	@order.save
       end
     redirect_to :back
   end
