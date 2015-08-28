@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :admin_user, only: [:index]
-  
+  before_action :allow_only_admin, only: [:index, :deliver_order, :destroy]
+  before_action :allow_only_user, only: [:user_orders]
+  before_action :is_there_user, only: [:user_orders]
+  before_action :is_correct_user, only: [:show]
+
   def index
     @orders = Order.all
     @orders.each do |order|
@@ -15,6 +18,10 @@ class OrdersController < ApplicationController
     redirect_to orders_path
   end
 
+  def show
+    @order = Order.find(params[:id])
+  end
+
   def deliver_order
     @order = Order.find(params[:order_id])
     @order.Abgeschickt!
@@ -23,21 +30,38 @@ class OrdersController < ApplicationController
   end
 
   def user_orders
-    @orders = current_user.orders
-  end
-
-  def show
-    @order = Order.find(params[:id])
+    @orders = Order.where(user_id: current_user[:id])
+    
   end
 
   private
 
-    def admin_user
-      if current_user
-        @user = current_user
-        redirect_to(articles_path) unless @user[:admin] == true
+    def allow_only_admin
+      if (!current_user.try(:admin?))
+        redirect_to(meine_bestellungen_path)
+      end
+    end
+
+    def allow_only_user
+      if current_user.try(:admin?)
+        redirect_to(orders_path)
+      end
+    end
+
+    def is_there_user
+      if !(user_signed_in?) 
+        redirect_to(bestellen_path)
+      end
+    end
+
+    def is_correct_user
+      order = Order.find(params[:id])
+      if (user_signed_in?)
+        if ((current_user[:id] !=  order[:user_id]) && !(current_user.try(:admin?)))
+          redirect_to(meine_bestellungen_path)
+        end
       else
-	redirect_to(articles_path)
+	 redirect_to(bestellen_path)
       end
     end
 end
