@@ -26,8 +26,10 @@ require 'capybara/rspec'
 require 'capybara/rails'
 
 RSpec.configure do |config|
+  config.include Warden::Test::ControllerHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+  
   DatabaseCleaner.strategy = :truncation
   config.before(:suite) do 
     begin 

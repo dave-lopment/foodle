@@ -44,8 +44,12 @@ class OrdersController < ApplicationController
   private
 
     def allow_only_admin
-      if (!current_user.try(:admin?))
-        redirect_to(meine_bestellungen_path)
+      if user_signed_in?
+        if (!current_user.try(:admin?))
+          redirect_to(meine_bestellungen_path)
+        end
+      else
+	  redirect_to(bestellen_path)
       end
     end
 

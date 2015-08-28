@@ -178,7 +178,7 @@ RSpec.describe OrdersController, type: :controller do
     context "No User" do
       it "renders the :articles template" do
 	get :user_orders
-	expect(reponse).to redirect_to(bestellen_path)
+	expect(response).to redirect_to(bestellen_path)
       end
     end
 

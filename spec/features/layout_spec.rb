@@ -98,7 +98,7 @@ feature "general layout" do
 		end 
 
 		scenario "has a link to orders#user_oders" do 
-			expect(page).to have_link('', :href => user_orders_path)
+			expect(page).to have_link('', :href => meine_bestellungen_path)
 		end 
 
         scenario "does not have an Admin flag" do 
