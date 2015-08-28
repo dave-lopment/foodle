@@ -25,7 +25,7 @@ feature 'order management user facing' do
     before(:each) do
       log_in_as(create(:user))
       @order = create(:order)
-    erd
+    end
 
     context "show only orders with correct status" do
       scenario "user does not see any orders with status 'Erstellung'" do
