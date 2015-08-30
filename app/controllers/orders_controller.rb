@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all
     @orders.each do |order|
-      if order.Erstellung? && (order.updated_at > 2.days.ago)
+      if order.Erstellung? && (order.updated_at < 2.hours.ago)
         Order.find(order[:id]).destroy
       end
     end
