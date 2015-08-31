@@ -4,6 +4,7 @@
       <td>Info</td><td>Aktionen</td>
     </tr>
     <% @orders.each do |order| %>
+    <% if !order.Erstellung? %>	    
         <tr>
           <td>
             Status: <%= order.order_status %> <br/>
@@ -22,7 +23,7 @@
           </td>
         </tr>
       <% end %>  
-
+     <% end %>
   </table>
 
 
