@@ -13,39 +13,39 @@ feature "general layout" do
     click_button 'Anmelden'
   end
 
-	context "navbar as admin" do 
+	context "navbar as admin" do
 		let(:admin){FactoryGirl.create(:user, admin: true)}
 
-        before(:each) do 
+        before(:each) do
             log_in_as(admin)
-        end 
+        end
 
-    	scenario "has a link to 'articles#index'" do 
+    	scenario "has a link to 'articles#index'" do
         	expect(page).to have_link('', :href => articles_path)
-        end 
+        end
 
-    	scenario "has a link to users#index" do 
+    	scenario "has a link to users#index" do
         	expect(page).to have_link('', :href => users_path)
-        end 
+        end
 
-    	scenario "has a link to orders#index" do 
+    	scenario "has a link to orders#index" do
         	expect(page).to have_link('', :href => orders_path)
-        end 
+        end
 
-    	scenario "redirects to articles#index when 'Stammdaten' is clicked" do 
-    		click_on 'Stammdaten' 
+    	scenario "redirects to articles#index when 'Stammdaten' is clicked" do
+    		click_on 'Stammdaten'
     		expect(current_path).to eq(articles_path)
-    	end 
+    	end
 
-    	scenario "redirects to users#index when 'Benutzer' is clicked" do 
-    		click_on 'Benutzer' 
+    	scenario "redirects to users#index when 'Benutzer' is clicked" do
+    		click_on 'Benutzer'
     		expect(current_path).to eq(users_path)
-    	end 
+    	end
 
-    	scenario "redirects to orders#index when 'Bestellungen' is clicked" do 
-    		click_on 'Bestellungen' 
+    	scenario "redirects to orders#index when 'Bestellungen' is clicked" do
+    		click_on 'Bestellungen'
     		expect(current_path).to eq(orders_path)
-    	end 
+    	end
 
     	scenario "has admin-flag in navbar" do
         	expect(page).to have_content '(Admin)'
@@ -59,7 +59,7 @@ feature "general layout" do
             expect(page).not_to have_content 'Anmelden'
             expect(page).not_to have_content 'Registrieren'
         end
-  
+
         scenario "has no Account functions after log-out but 'Anmelden' and 'Registrieren'" do
             click_on 'Abmelden'
             expect(page).not_to have_content 'Account'
@@ -69,41 +69,41 @@ feature "general layout" do
             expect(page).to have_content 'Anmelden'
             expect(page).to have_content 'Registrieren'
         end
-          
-        scenario "redirects to users#edit when 'Profil bearbeiten' is clicked" do
+
+        scenario "redirects to profile_edit when 'Profil bearbeiten' is clicked" do
             click_on 'Profil bearbeiten'
-            expect(current_path).to eq(edit_user_path(admin))
+            expect(current_path).to eq(profile_edit_path)
         end
 
         scenario "redirects to devise/registrations#edit when 'Passwort ändern' is clicked" do
             click_on 'Passwort ändern'
             expect(current_path).to eq(edit_user_registration_path(admin))
         end
-	end 
+	end
 
-	context "navbar as normal user" do 
+	context "navbar as normal user" do
 		let (:user){FactoryGirl.create(:user)}
 		subject{user}
 
-        before(:each) do 
+        before(:each) do
             log_in_as(user)
-        end 
+        end
 
-		scenario "has a link to home page" do 
+		scenario "has a link to home page" do
 			expect(page).to have_link('', :href => root_path)
-		end 
+		end
 
-		scenario "has a link to articles#bestellen" do 
+		scenario "has a link to articles#bestellen" do
 			expect(page).to have_link('', :href => bestellen_path)
-		end 
+		end
 
-		scenario "has a link to orders#user_oders" do 
+		scenario "has a link to orders#user_oders" do
 			expect(page).to have_link('', :href => meine_bestellungen_path)
-		end 
+		end
 
-        scenario "does not have an Admin flag" do 
+        scenario "does not have an Admin flag" do
             expect(page).not_to have_content('(Admin)')
-        end 
+        end
 
         scenario "has correct 'Account' functions" do
             expect(page).to have_content 'Account'
@@ -113,7 +113,7 @@ feature "general layout" do
             expect(page).not_to have_content 'Anmelden'
             expect(page).not_to have_content 'Registrieren'
         end
-  
+
         scenario "has no Account functions after log-out but 'Anmelden' and 'Registrieren'" do
             click_on 'Abmelden'
             expect(page).not_to have_content 'Account'
@@ -123,10 +123,10 @@ feature "general layout" do
             expect(page).to have_content 'Anmelden'
             expect(page).to have_content 'Registrieren'
         end
-          
-        scenario "redirects to users#edit when 'Profil bearbeiten' is clicked" do
+
+        scenario "redirects to profile_edit when 'Profil bearbeiten' is clicked" do
             click_on 'Profil bearbeiten'
-            expect(current_path).to eq(edit_user_path(user))
+            expect(current_path).to eq(profile_edit_path)
         end
 
         scenario "redirects to devise/registrations#edit when 'Passwort ändern' is clicked" do
@@ -134,8 +134,8 @@ feature "general layout" do
             expect(current_path).to eq(edit_user_registration_path(user))
         end
 
-	end 
+	end
 
 
 
-end 
+end
