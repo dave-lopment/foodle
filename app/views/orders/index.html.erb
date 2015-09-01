@@ -4,12 +4,12 @@
       <td>Info</td><td>Aktionen</td>
     </tr>
     <% @orders.each do |order| %>
-    <% if !order.Erstellung? %>	    
+    <% if !order.Erstellung? %>
         <tr>
           <td>
             Status: <%= order.order_status %> <br/>
             An: <%= order.street %> <br/>
-            <%= order.postal %> <%= order.city %> 
+            <%= order.postal %> <%= order.city %>
           </td>
           <td>
             <%= link_to order , method: :delete,
@@ -17,12 +17,14 @@
                   <i class="glyphicon glyphicon-remove"></i>
             <% end %>
             <%= link_to "Details", order_path(order.id), :class => "btn btn-primary cart-btn" %>
-            <%= link_to "Liefern", deliver_order_path(:order_id => order.id), :class => "btn btn-success cart-btn" %>
-            
-          
+            <% if order.Auftrag? %>
+              <%= link_to "Liefern", deliver_order_path(:order_id => order.id), :class => "btn btn-success cart-btn" %>
+            <% end %>
+
+
           </td>
         </tr>
-      <% end %>  
+      <% end %>
      <% end %>
   </table>
 
