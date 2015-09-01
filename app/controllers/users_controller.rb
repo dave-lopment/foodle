@@ -20,6 +20,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def profile_edit
+    @user = current_user
+  end 
+
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)

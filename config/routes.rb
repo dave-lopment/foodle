@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
- 
+
     root 'root_pages#home'
 
   devise_for :users
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get 'cancel_order',  to: 'carts#cancel_order'
   get 'meine_bestellungen', to: 'orders#user_orders'
   get 'received_order', to: 'orders#received_order'
+  get 'profile_edit', to: 'users#profile_edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

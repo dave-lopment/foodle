@@ -19,9 +19,9 @@
   <% end %>
       <% if current_user %>
         <%= drop_down "Account" do %>
-          <%= menu_item "Profil bearbeiten", edit_user_path(current_user) %>
-          <%= menu_item "Passwort ändern", edit_user_registration_path(current_user) %>
-          <%= menu_item "Abmelden", destroy_user_session_path, method: :delete %>
+            <%= menu_item "Profil bearbeiten", profile_edit_path %>
+            <%= menu_item "Passwort ändern", edit_user_registration_path(current_user) %>
+            <%= menu_item "Abmelden", destroy_user_session_path, method: :delete %>
         <% end %>
       <% else %>
           <%= menu_item "Anmelden", new_user_session_path %>

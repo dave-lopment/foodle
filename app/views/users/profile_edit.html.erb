@@ -1,0 +1,44 @@
+<h1>Dein Profil bearbeiten</h1>
+<div class="col-md-4 center-div">
+  <%= form_for (@user) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :name, "Name" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :street, 'Straße' %>
+      <%= f.text_field :street, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :city, "Stadt" %>
+      <%= f.text_field :city, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :postal, "PLZ" %>
+      <%= f.text_field :postal, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email, "E-Mail" %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+
+    <%= link_to "Abbrechen", :back, class: "btn btn-default" %>
+    <%= f.submit "Speichern", class: "btn btn-primary pull-right" %>
+
+  <% end %>
+  <br/>
+  <hr/>
+  Account löschen?
+  <span class="pull-right">
+    <%= button_to "Ja, Account löschen", registration_path(current_user),
+      data: { confirm: "Bist du sicher?" }, method: :delete,
+      class: "btn btn-danger cart-btn" %>
+  </span>
+  <br/>
+
+</div>
