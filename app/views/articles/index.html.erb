@@ -32,9 +32,9 @@
       <%= link_to edit_article_path(article), :class => "btn btn-warning cart-btn" do %>
       <i class="glyphicon glyphicon-edit"></i>
       <% end %>
-      
+
       <%= link_to article, method: :delete,
-      data: { confirm: "Artikel #{article.name} löschen?" }, :class => "btn btn-danger cart-btn" do %>
+      data: { confirm: "Artikel #{article.name} löschen?" }, id: 'destroy', :class => "btn btn-danger cart-btn" do %>
       <i class="glyphicon glyphicon-remove"></i>
       <% end %>
     </div>
