@@ -10,7 +10,7 @@
           <td>
             Status: <%= order.order_status %> <br/>
             An: <%= order.street %> <br/>
-            <%= order.postal %> <%= order.city %> 
+            <%= order.postal %> <%= order.city %>
           </td>
 	  <td>
 	  <% if order.Auftrag? %>
@@ -19,11 +19,11 @@
 		  <%= link_to "Geliefert",  received_order_path(:order_id => order.id), :class => "btn btn-success cart-btn"%>
           <% end %>
             <%= link_to "Details", order_path(order.id), :class => "btn btn-primary cart-btn" %>
-          
+
           </td>
         </tr>
-      <% end %>  
-    <% end %> 
+      <% end %>
+    <% end %>
   <% end %>
   </table>
 

@@ -7,8 +7,14 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def current_order
+
     if(!session[:order_id].nil?)
-      Order.find(session[:order_id])
+      if Order.find(session[:order_id]).Erstellung?
+        Order.find(session[:order_id])
+      else
+        session[:order_id] = nil
+        Order.new
+      end
     else
       Order.new
     end
@@ -17,10 +23,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
       if(current_user.try(:admin?))
           orders_path
-      else 
+      else
           root_path
-      end 
-  end 
+      end
+  end
 
   protected
   def configure_permitted_parameters
