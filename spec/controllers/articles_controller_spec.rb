@@ -2,36 +2,44 @@ require 'rails_helper'
 
 RSpec.describe ArticlesController, type: :controller do
   describe "GET #index" do
-    it "assigns @categories for admins" do 
-      sign_in(create(:user, admin: true))
-      category = create(:category) 
-      get :index 
-      expect(assigns(:categories)). to eq([category])
-    end 
-
-    it "assings @articles for admins" do
-      sign_in(create(:user, admin: true))
-      article = create(:article)
-      get :index
-      expect(assigns(:articles)).to eq([article])
+    context "admin" do	  
+      let(:admin){create(:user,admin: true)}
+      before(:each) do
+        sign_in(admin)
+      end
+      it "assigns @categories for admins" do 
+        category = create(:category) 
+        get :index 
+        expect(assigns(:categories)). to eq([category])
+      end 
+    
+      it "assings @articles for admins" do
+        article = create(:article)
+        get :index
+        expect(assigns(:articles)).to eq([article])
+      end
+    
+      it "renders the :index view for admins" do
+        get :index
+        expect(response).to render_template(:index)
+      end
     end
-
-    it "renders the :index view for admins" do
-      sign_in(create(:user, admin:true))
-      get :index
-      expect(response).to render_template(:index)
+    context "normal user" do
+      let(:user){create(:user)}
+      before(:each) do
+        sign_in(user)
+      end
+      it "redirects to the bestellungen view for normal users" do 
+        get :index 
+        expect(response).to redirect_to(bestellen_path)
+      end 
     end
-
-    it "redirects to the bestellungen view for normal users" do 
-      sign_in(create(:user))
-      get :index 
-      expect(response).to redirect_to(bestellen_path)
-    end 
-
-    it "redirects to the bestellungen view for everyone else" do 
-      get :index 
-      expect(response).to redirect_to(bestellen_path)
-    end 
+    context "everyone else" do
+      it "redirects to the bestellungen view for everyone else" do 
+        get :index 
+        expect(response).to redirect_to(bestellen_path)
+      end 
+    end
   end
 
   describe "GET #bestellen" do 
@@ -67,18 +75,17 @@ RSpec.describe ArticlesController, type: :controller do
   end 
 
   describe "GET #show" do
-    context "admin" do 
+    context "admin" do
+      let(:article){create(:article)}
       before(:each) do
         sign_in(create(:user, admin: true))
       end
       it "assigns the requested article to @article" do
-        article = create(:article)
         get :show, id: article
         expect(assigns(:article)).to eq(article)
       end
 
       it "renders the :show template" do
-        article = create(:article)
         get :show, id: article
         expect(response).to render_template(:show)
       end
@@ -134,49 +141,31 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "GET #edit" do
+    let(:article){create(:article)}
     before(:each) do
       sign_in(create(:user, admin:true))
     end
 
     it "renders the :edit template" do
-      get :edit, id: create(:article)
+      get :edit, id: article
       expect(response).to render_template(:edit)
     end
 
     it "assigns the requested article to @article" do
-      article = create(:article)
       get :edit, id: article
       expect(assigns(:article)).to eq(article)
     end
   end
 
   describe "DELETE #destroy" do
-
+    let!(:article){create(:article)}
     it "deletes an article" do
       sign_in(create(:user, admin:true))
-      article = create(:article)
       expect {
         delete :destroy, :id => article.id
       }.to change(Article, :count).by(-1)
     end
   end
-
-  # describe "PUT #update" do
-  #   @article = create(:article)
-  #   let(:attr) do
-  #     { :name => 'New Name', :description => 'New Description yeah', :price => 99.99 }
-  #   end
-  #
-  #   before(:each) do
-  #     put :update, :id => @article.id, :article => attr
-  #     @article.reload
-  #   end
-  #   it { expect(response).to redirect_to(@article) }
-  #   it { expect(@article.name).to eq attr[:name] }
-  #   it { expect(@article.description).to eq attr[:description]}
-  #
-  #
-  # end
 
   describe "PUT #update" do
     let(:attr) do

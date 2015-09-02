@@ -34,9 +34,8 @@ require 'rails_helper'
 
       it "count of single article should be increased by quantity if already in cart" do
         attr = attributes_for(:order_item, {quantity:2, order_id: order.id, article_id: article.id})
-	attr2 = {quantity:2, order_id: order_item.order_id, article_id: order_item.article_id}
 	expect(order.order_items.find_by(article_id: article.id).quantity).to eq(3)
-	post :create, {order_item: attr2}
+	post :create, {order_item: attr}
 	expect(order.order_items.find_by(article_id: article.id).quantity).to eq(5)
       end
     end
