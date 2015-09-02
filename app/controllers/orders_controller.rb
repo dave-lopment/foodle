@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   before_action :allow_only_admin, only: [:index, :deliver_order, :destroy]
-  before_action :allow_only_user, only: [:user_orders]
+  before_action only: [:user_orders] do
+    allow_only_normal_user(orders_path)
+  end
   before_action :is_there_user, only: [:user_orders]
   before_action :is_correct_user, only: [:show]
 
@@ -50,12 +52,6 @@ class OrdersController < ApplicationController
         end
       else
 	  redirect_to(bestellen_path)
-      end
-    end
-
-    def allow_only_user
-      if current_user.try(:admin?)
-        redirect_to(orders_path)
       end
     end
 

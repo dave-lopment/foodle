@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :admin_user, only: [:index]
+  before_action only: [:index] do
+    allow_only_admin(new_user_session_path)
+  end
   before_action :correct_user, only: [:edit]
 
   def index
@@ -37,15 +39,6 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :postal, :city, :street, :password, :password_confirmation)
-    end
-
-    def admin_user
-      if current_user
-        @user = current_user
-        redirect_to(new_user_session_path) unless (@user[:admin] == true)
-      else
-	redirect_to(new_user_session_path)
-      end
     end
 
     def correct_user

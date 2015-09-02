@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :current_order
+  helper_method :current_order, :allow_only_admin, :allow_only_normal_user
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -17,6 +17,18 @@ class ApplicationController < ActionController::Base
       end
     else
       Order.new
+    end
+  end
+
+  def allow_only_admin(redirectToPath)
+    if !current_user.try(:admin?)
+      redirect_to redirectToPath
+    end
+  end
+
+  def allow_only_normal_user(redirectToPath)
+    if current_user.try(:admin?)
+      redirect_to redirectToPath
     end
   end
 

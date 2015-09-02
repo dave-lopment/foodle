@@ -1,5 +1,7 @@
 class OrderItemsController < ApplicationController
-  before_action :allow_only_user, only: [:create, :update ,:destroy]
+  before_action  only: [:create, :update ,:destroy] do
+    allow_only_normal_user(orders_path)
+  end
   def create
     @order = current_order
     @order_item = @order.order_items.find_by(article_id: order_item_params[:article_id])
@@ -35,11 +37,5 @@ class OrderItemsController < ApplicationController
   
     def order_item_params
        params.require(:order_item).permit(:quantity, :article_id)
-    end
-
-    def allow_only_user
-      if current_user.try(:admin?)
-        redirect_to(orders_path)
-      end
     end
 end

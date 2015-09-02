@@ -201,12 +201,12 @@ RSpec.describe ArticlesController, type: :controller do
      
       it "redirects user trying to get edit articles" do
         get :edit, id: create(:article)
-        expect(response).to redirect_to(articles_path)
+        expect(response).to redirect_to(bestellen_path)
       end
 
       it "redirects user trying to get create articles" do
         get :new
-	expect(response).to redirect_to(articles_path)
+	expect(response).to redirect_to(bestellen_path)
       end
   end
 end
