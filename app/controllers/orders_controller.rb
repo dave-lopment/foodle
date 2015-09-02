@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :allow_only_admin, only: [:index, :deliver_order, :destroy]
-  before_action only: [:user_orders] do
+  before_action only: [:user_orders, :received_orders] do
     allow_only_normal_user(orders_path)
   end
   before_action :is_there_user, only: [:user_orders]

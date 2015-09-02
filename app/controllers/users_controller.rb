@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action only: [:index] do
+  before_action only: [:index, :edit, :show] do
     allow_only_admin(new_user_session_path)
   end
-  before_action :correct_user, only: [:edit]
+  before_action :correct_user, only: [:update]
 
   def index
     @users = User.paginate(:page => params[:page], :per_page => 10)
@@ -13,9 +13,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    #flash[:success] = "User deleted"
-    redirect_to users_path
+    if user_signed_in?
+      if current_user.try(:admin?) || current_user.id == params[:id]
+        User.find(params[:id]).destroy
+        redirect_to users_path
+      end
+    else
+      redirect_to root_path
+    end
   end
 
   def edit

@@ -21,6 +21,9 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET #show" do
+    before(:each) do
+      sign_in(admin)
+    end
     it "assigns the requested user to @user" do
       get :show, id: user
       expect(assigns(:user)).to eq(user)
@@ -33,6 +36,9 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+  before(:each) do
+    sign_in(admin)
+  end
     it "deletes an user" do
       expect {
         delete :destroy, id: user.id
