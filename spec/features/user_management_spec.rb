@@ -33,9 +33,6 @@ feature "the login process" do
         expect(page).to have_link('', :href => new_article_path)
       end
   
-      scenario "expect Admin to have a button to edit an article"
-  
-      scenario "expect Admin to have a button to delete an article"
   end
 
   context "Normal User Tests" do
@@ -53,26 +50,12 @@ feature "the login process" do
         expect(page).to have_button('Ja, Account löschen')
       end
       
-      # Should not be appear for normal user 
-      # scenario "expect Alle-Nutzer to link to the right path" do
-      #  log_in_as(user)
-      #  click_on 'Alle Nutzer'
-      #  expect(current_path).to eq(users_path)
-      # end
-
       scenario "expect User not to have a button to add an article" do
         log_in_as(user)
         click_on 'Bestellen'
         expect(page).not_to have_link('', :href => new_article_path)
       end
   
-      scenario "expect User not to have a button to edit an article"
-  
-      scenario "expect User not to have a button to delete an article"
-        
-      scenario "expect to have an quantity input"
-  
-      scenario "expect to have a add to cart button (submit)"
   end
 
   context "Admin and User Tests" do
@@ -80,7 +63,6 @@ feature "the login process" do
     subject{admin}
 
       scenario "expect Admin to have edit-button in Alle Nutzer" do
-        # find a way to get the user creation out of each scenario
         user = FactoryGirl.create(:user)
         log_in_as(admin)
         click_on 'Benutzer'
@@ -100,7 +82,6 @@ feature "the login process" do
     subject{user}
 
       scenario "expect User not to have a Benutzer Button" do
-        # find a way to get the user creation out of each scenario
         user2 = FactoryGirl.create(:user)
         log_in_as(user)
         expect(page).not_to have_link('', :href => users_path)

@@ -61,10 +61,6 @@ feature "order management admin facing" do
         set_order_status(order,1)
       end
 
-      scenario "admin sees delete button"
- 
-      scenario "after clicking delete button, order is gone"
- 
       scenario "admin sees detail link" do
         expect(page).to have_link 'Details'
       end

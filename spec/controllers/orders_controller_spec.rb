@@ -52,8 +52,6 @@ RSpec.describe OrdersController, type: :controller do
 	}.to change(Order, :count).by(-1)
       end
 
-      it "user tries to delete article, muss/kann man das testen?"
-
     end
 
   end
