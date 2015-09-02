@@ -8,6 +8,57 @@ require 'rails_helper'
 
   describe "POST  #create" do
 
+    context "admin" do
+      before(:each) do
+        sign_in(create(:user, admin:true))
+	session[:order_id] = order.id
+      end
+      it "cannot create an order item" do
+	article2 = create(:article)
+	attr = attributes_for(:order_item, {quantity:1, order_id: order.id, article_id: article2.id})
+        expect{post :create, {order_item: attr}}.to change(order.order_items, :count).by(0)
+      end
+
+    end
+
+    context "user" do
+      before(:each) do
+        sign_in(user)
+	session[:order_id] = order.id
+      end
+      it "can create an order item" do
+	article2 = create(:article)
+        attr = attributes_for(:order_item, {quantity:1, order_id: order.id, article_id: article2.id})
+	expect{post :create, {order_item: attr}}.to change(order.order_items, :count).by(1)
+      end
+
+      it "count of single article should be increased by quantity if already in cart" do
+        attr = attributes_for(:order_item, {quantity:2, order_id: order.id, article_id: article.id})
+	attr2 = {quantity:2, order_id: order_item.order_id, article_id: order_item.article_id}
+	expect(order.order_items.find_by(article_id: article.id).quantity).to eq(3)
+	post :create, {order_item: attr2}
+	expect(order.order_items.find_by(article_id: article.id).quantity).to eq(5)
+      end
+    end
+
+    context "no user" do
+      before(:each) do
+	session[:order_id] = order.id
+      end
+      it "can create an order item" do
+	article2 = create(:article)
+        attr = attributes_for(:order_item, {quantity:1, order_id: order.id, article_id: article2.id})
+	expect{post :create, {order_item: attr}}.to change(order.order_items, :count).by(1)
+      end
+
+      it "count of single article should be increased by quantity if already in cart" do
+        attr = attributes_for(:order_item, {quantity:2, order_id: order.id, article_id: article.id})
+	expect(order.order_items.find_by(article_id: article.id).quantity).to eq(3)
+	post :create, {order_item: attr}
+        expect(order.order_items.find_by(article_id: article.id).quantity).to eq(5)
+      end
+    end
+
   end
 
   describe "POST #update" do
@@ -15,10 +66,10 @@ require 'rails_helper'
 	context "admin" do
 	before(:each) do
           sign_in(create(:user, admin:true))
-	  current_order = order
+	  session[:order_id] = order.id
 	end
           it "does not update the quantity of the article" do
-	    put :update, :id => order_item.id,:article_id => order_item.article_id, :quantity => 2
+	    put :update, :id => order_item.id, :order_item => {:quantity => 2, :article_id => order_item.article_id}
 	    order_item.reload
 	    expect(order_item.quantity).to eq(3)
 	  end
@@ -27,9 +78,10 @@ require 'rails_helper'
 	context "user" do
 	before(:each) do
 	  sign_in(user)
+          session[:order_id] = order.id
 	end
           it "updates the quantity of the article" do
-	    put :update, :id => order_item.id,:article_id => order_item.article_id, :quantity => 2
+	    put :update, :id => order_item.id, :order_item => {:quantity => 2, :article_id => order_item.article_id}
 	    order_item.reload
 	    expect(order_item.quantity).to eq(2)
 	  end
@@ -37,10 +89,14 @@ require 'rails_helper'
 	end
 
 	context "no user" do
-          it "does not update the quantity of the article" do 
-	    put :update, :id => order_item.id,:article_id => order_item.article_id, :quantity => 2
+          before(:each) do
+            session[:order_id] = order.id
+	  end
+
+          it "does update the quantity of the article" do 
+	    put :update, :id => order_item.id, :order_item => {:quantity => 2, :article_id => order_item.article_id}
 	    order_item.reload
-	    expect(order_item.quantity).to eq(3)
+	    expect(order_item.quantity).to eq(2)
 	  end
 	end
   end
@@ -48,29 +104,35 @@ require 'rails_helper'
   describe "POST #destroy" do
           
 	context "admin" do
-
-	  # could not be found because in the controller we are using current_order
-	  it "could not deletes an order item" do
+	  before(:each) do
             sign_in(create(:user, admin: true))
-	    @order_item = create(:order_item)
-	    current_order = create(:order, order_items: [@order_item])
-	    current_order.reload
-	    @order_item.reload
-	    session[current_order.id] = current_order.id
-	    expect{ delete :destroy, :id => @order_item.id}.to change(current_order, :count).by(-1)
+	    session[:order_id] = order.id
+	  end
+
+	  it "could not delete an order item" do
+	    expect{ delete :destroy, :id => order_item.id }.to change(order.order_items, :count).by(0)
 	  end
 
 	end
 
 	context "user" do
-
-          it "deletes an order item" 
+          before(:each) do
+            sign_in(user)
+	    session[:order_id] = order.id
+	  end
+          it "deletes an order item" do
+            expect{ delete :destroy, :id => order_item.id}.to change(order.order_items, :count).by(-1)
+	  end
 
 	end
 
         context "no user" do
-        
-          it "deletes an order item" 
+          before(:each) do
+            session[:order_id] = order.id
+	  end
+          it "deletes an order item" do
+            expect{ delete :destroy, :id => order_item.id}.to change(order.order_items, :count).by(-1)
+	  end
 
 	end
 

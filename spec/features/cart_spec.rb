@@ -25,10 +25,6 @@ feature "cart action" do
     find_field("#{product.name}-quantity").value.set(quantity)
   end
 
-  context "admin" do
-
-  end
-
   context "user" do
     let(:user){create(:user)}
     let(:article2){create(:article, category_id: category.id)}
@@ -55,20 +51,8 @@ feature "cart action" do
       expect(page).to have_content '2 in Warenkorb'
     end
 
-    it "after adding article with quantity 2, there are two articles in cart" do
-      increase_quantity(article, 2)
-      put_sth_to_cart(article)
-      expect(page).to have_Content '2 in Warenkorb'
-    end
-
   end
 
-
-it "Expect to have one article of quantity 2 after clicking add button twice"
-
-it "Expect to have one article with quantity x after clicking add button with qua    ntity x" 
-
-it "Expect not to increase number of article in cart when adding article with qua    ntity 0"
   describe 'inside cart' do
    let(:user){create(:user)}
    let(:article2){create(:article)}
@@ -97,15 +81,6 @@ it "Expect not to increase number of article in cart when adding article with qu
        expect(page).to have_selector ("input[value='2']")
      end
  
-     it "has one article with quantity 7 in cart" do
-       increase_quantity(article, '7')
-       save_and_open_page
-       put_sth_to_cart(article)
-       visit cart_path
-       save_and_open_page
-       expect(page).to have_selector ("input[value='7']")
-     end
- 
      it "has two articles with quantity one in cart" do
        put_sth_to_cart(article)
        put_sth_to_cart(article2)
@@ -115,14 +90,8 @@ it "Expect not to increase number of article in cart when adding article with qu
      end
 
 
-    it "Expect to equal the new quantity after updating quantity" 
   end
 
  end
-
-
-it "Expect not to update quantity when updating quantity to 0"
-
-it "Expect to decrease cart count after delete article"
 
 end
