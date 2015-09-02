@@ -4,25 +4,6 @@ feature 'order management user facing' do
   let(:user) {create(:user)}
   let(:order) {create(:order, :order_items => [order_item], :user_id => user.id)}
   let(:order_item){create(:order_item)}
-  #TODO Put log_in_as(user) and set_order_status to a test_helper file
-
-  def log_in_as(user)
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with => user.password
-    end
-    click_button 'Anmelden'
-    visit meine_bestellungen_path
-  end
-
-  def set_order_status(order, status_id)
-    order.order_status = status_id
-    order.save!
-    order.reload
-    visit meine_bestellungen_path
-  end
 
   context "user" do
     before(:each) do

@@ -5,16 +5,6 @@ feature "Admin logs in and sees the 'Stammdaten' page (article#index)" do
 	let(:category){create(:category)}
 	let!(:article){create(:article, category_id: category.id)}
 
-	def log_in_as(user)
-   	visit new_user_session_path
-   	expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      	fill_in 'E-Mail', :with => user.email
-      	fill_in 'Passwort', :with =>user.password
-    end
-  	click_button 'Anmelden'
-  	end
-
 	before(:each) do
 		# loggin in as admin redirects to the Stammdaten page!
 		log_in_as(admin)

@@ -6,23 +6,9 @@ feature "cart action" do
   let(:category){create(:category)}
   let!(:article){create(:article, category_id: category.id)}
 
-  def log_in_as(user)
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-       fill_in 'E-Mail', :with => user.email
-       fill_in 'Passwort', :with =>user.password
-     end
-    click_button 'Anmelden'
-  end
-
   def put_sth_to_cart(product)
     visit bestellen_path
     click_button("#{product.name}-cart-button")
-  end
-
-  def increase_quantity(product, quantity)
-    find_field("#{product.name}-quantity").value.set(quantity)
   end
 
   context "user" do

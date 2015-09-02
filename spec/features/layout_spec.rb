@@ -3,16 +3,6 @@ require 'rails_helper'
 feature "general layout" do
 
 
-  def log_in_as(user)
-    visit new_user_session_path
-    expect(page).to have_content 'Anmeldung'
-    within("#new_user") do
-      fill_in 'E-Mail', :with => user.email
-      fill_in 'Passwort', :with =>user.password
-    end
-    click_button 'Anmelden'
-  end
-
 	context "navbar as admin" do
 		let(:admin){FactoryGirl.create(:user, admin: true)}
 

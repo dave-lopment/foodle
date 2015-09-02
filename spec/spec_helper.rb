@@ -25,11 +25,31 @@ require 'devise'
 require 'capybara/rspec'
 require 'capybara/rails'
 
+  module FeatureHelper
+    def log_in_as(user)
+      visit new_user_session_path
+      expect(page).to have_content 'Anmeldung'
+      within("#new_user") do
+        fill_in 'E-Mail', :with => user.email
+        fill_in 'Passwort', :with =>user.password
+      end
+      click_button 'Anmelden'
+    end
+
+    def set_order_status(order, status_id) 
+      order.order_status = status_id
+      order.save!
+      order.reload
+      visit meine_bestellungen_path
+    end
+  end
+
 RSpec.configure do |config|
   config.include Warden::Test::ControllerHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
-  
+  config.include FeatureHelper, type: :feature
+
   DatabaseCleaner.strategy = :truncation
   config.before(:suite) do 
     begin 
@@ -40,6 +60,7 @@ RSpec.configure do |config|
     end
   end
 
+  
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
