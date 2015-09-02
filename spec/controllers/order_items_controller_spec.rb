@@ -5,7 +5,9 @@ require 'rails_helper'
   let(:order_item) {create(:order_item, quantity: 3, article_id: article.id)}
   let(:article) {create(:article)}
   let(:user) {create(:user)}
-
+  let(:article2){create(:article)}
+  let(:attr_new_article){ attributes_for(:order_item, {quantity:1, order_id: order.id, article_id: article2.id})}
+  let(:attr_old_article){attributes_for(:order_item, {quantity:2, order_id: order.id, article_id: article.id})}
   describe "POST  #create" do
 
     context "admin" do
@@ -14,28 +16,24 @@ require 'rails_helper'
 	session[:order_id] = order.id
       end
       it "cannot create an order item" do
-	article2 = create(:article)
-	attr = attributes_for(:order_item, {quantity:1, order_id: order.id, article_id: article2.id})
-        expect{post :create, {order_item: attr}}.to change(order.order_items, :count).by(0)
+        expect{post :create, {order_item: attr_new_article}}.to change(order.order_items, :count).by(0)
       end
 
     end
 
     context "user" do
+
       before(:each) do
         sign_in(user)
 	session[:order_id] = order.id
       end
       it "can create an order item" do
-	article2 = create(:article)
-        attr = attributes_for(:order_item, {quantity:1, order_id: order.id, article_id: article2.id})
-	expect{post :create, {order_item: attr}}.to change(order.order_items, :count).by(1)
+	expect{post :create, {order_item: attr_new_article}}.to change(order.order_items, :count).by(1)
       end
 
       it "count of single article should be increased by quantity if already in cart" do
-        attr = attributes_for(:order_item, {quantity:2, order_id: order.id, article_id: article.id})
 	expect(order.order_items.find_by(article_id: article.id).quantity).to eq(3)
-	post :create, {order_item: attr}
+	post :create, {order_item: attr_old_article}
 	expect(order.order_items.find_by(article_id: article.id).quantity).to eq(5)
       end
     end
@@ -45,15 +43,12 @@ require 'rails_helper'
 	session[:order_id] = order.id
       end
       it "can create an order item" do
-	article2 = create(:article)
-        attr = attributes_for(:order_item, {quantity:1, order_id: order.id, article_id: article2.id})
-	expect{post :create, {order_item: attr}}.to change(order.order_items, :count).by(1)
+	expect{post :create, {order_item: attr_new_article}}.to change(order.order_items, :count).by(1)
       end
 
       it "count of single article should be increased by quantity if already in cart" do
-        attr = attributes_for(:order_item, {quantity:2, order_id: order.id, article_id: article.id})
 	expect(order.order_items.find_by(article_id: article.id).quantity).to eq(3)
-	post :create, {order_item: attr}
+	post :create, {order_item: attr_old_article}
         expect(order.order_items.find_by(article_id: article.id).quantity).to eq(5)
       end
     end
